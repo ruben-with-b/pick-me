@@ -3,13 +3,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
 
 // import swagger
 const yaml = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = yaml.load('./swagger.yaml');
+const swaggerDocument = yaml.load('./backend/swagger.yaml');
 
 const app = express();
 
