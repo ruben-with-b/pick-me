@@ -34,15 +34,15 @@ export default {
   data: () => ({
     links: [
       {
-        name: 'Home',
+        name: 'My bags',
         to: '/'
       },
       {
-        name: 'Page 1',
-        to: '/page-1'
+        name: 'Overview',
+        to: '/overview'
       },
       {
-        name: 'Bad Link',
+        name: '404',
         to: '/random-bad-url'
       }
     ]
