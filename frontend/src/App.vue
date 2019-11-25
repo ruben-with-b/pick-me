@@ -25,7 +25,7 @@
     color: black;
   }
   li a:hover {
-    color: #404040;
+    color: blue;
   }
 </style>
 
@@ -35,17 +35,17 @@ export default {
     links: [
       {
         name: 'My bags',
-        to: '/'
+        to: '/',
       },
       {
         name: 'Overview',
-        to: '/overview'
+        to: '/overview',
       },
       {
         name: '404',
-        to: '/random-bad-url'
-      }
-    ]
-  })
-}
+        to: '/random-bad-url',
+      },
+    ],
+  }),
+};
 </script>

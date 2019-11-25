@@ -1,5 +1,14 @@
 // mixins, typo, colors, headlines...
 
+@import url('https://fonts.googleapis.com/css?family=Heebo:900&display=swap');
+
+body{
+    background: salmon;
+}
+
 h1{
-    background: yellow;
+    font-family: 'Heebo', Helvetica, Arial, sans-serif;
+    font-size: 5rem;
+    color: navy;
+    margin: 1em 0 0 1em;
 }
