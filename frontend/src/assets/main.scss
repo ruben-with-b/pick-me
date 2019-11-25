@@ -1,5 +1,7 @@
 // mixins, typo, colors, headlines...
 
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/grid/columns.sass";
 @import url('https://fonts.googleapis.com/css?family=Heebo:900&display=swap');
 
 body{

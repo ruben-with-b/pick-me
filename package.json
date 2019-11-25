@@ -9,6 +9,7 @@
     "start:frontend": "webpack-dev-server --config webpack.config.js --progress"
   },
   "dependencies": {
+    "bulma": "^0.8.0",
     "concurrently": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
