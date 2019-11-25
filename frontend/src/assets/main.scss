@@ -3,6 +3,7 @@
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/grid/columns.sass";
 @import url('https://fonts.googleapis.com/css?family=Heebo:900&display=swap');
+@import "@/assets/breakpoints.scss";
 
 body{
     background: salmon;
@@ -10,7 +11,19 @@ body{
 
 h1{
     font-family: 'Heebo', Helvetica, Arial, sans-serif;
-    font-size: 5rem;
+    font-size: 2rem;
     color: navy;
     margin: 1em 0 0 1em;
+    @include s {
+        font-size: 3rem;
+    }
+    @include m {
+        font-size: 3rem;
+    }
+    @include xl {
+        font-size: 5rem;
+    }
+    @include xxl {
+        font-size: 6rem;
+    }
 }
