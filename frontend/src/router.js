@@ -4,6 +4,7 @@ import Router from 'vue-router';
 // Page content
 import Overview from '@/components/Overview';
 import Dashboard from '@/components/Dashboard';
+import List from '@/components/List';
 
 // Fallback page
 import PageNotFound from '@/components/PageNotFound';
@@ -21,6 +22,11 @@ export default new Router({
       path: '/overview',
       name: 'Overview',
       component: Overview,
+    },
+    {
+      path: '/list',
+      name: 'List',
+      component: List,
     },
     {
       path: '**',

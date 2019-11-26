@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "nodemon ./backend/bin/www",
-    "start:frontend": "webpack-dev-server --config webpack.config.js --progress"
+    "start:frontend": "webpack-dev-server --config webpack.config.js --progress",
+    "lint": "eslint ./"
   },
   "dependencies": {
     "bulma": "^0.8.0",
@@ -29,7 +30,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
-    "eslint": "^6.7.0",
+    "eslint": "^6.7.1",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^6.0.1",
     "html-webpack-plugin": "^3.2.0",
