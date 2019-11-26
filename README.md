@@ -3,6 +3,8 @@
 ## Start
 Zum Starten der Anwendung `npm start` eingeben. Danach findet man die Anwendung
 unter *https://localhost:8080*.<br>
+Gleichzeitig mit der Anwendung wird auch die API-Dokumentation ausgeliefert. 
+Die API-Dokumentation findet man unter *http://localhost:3000/api-docs*
 
 ## Konsolen-Output
 Jede Zeile, die mit [0] beginnt stammt vom Backend.<br>
