@@ -14,8 +14,8 @@ const dbClient = new MongoClient(URI, {
 );
 
 /**
- * Get all available bags. These bags are preconfigured with an illustration
- * and a name suggestion.
+ * Get all available bag templates. These bag templates are preconfigured with
+ * an illustration and a name suggestion.
  * @return {Promise<Bag[]>}
  */
 function getBagTemplates() {
