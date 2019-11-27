@@ -8,7 +8,13 @@ router.get('/', function(req, res) {
   dbClient.connect().then(() => {
     return dbClient.getBags();
   }).then((bags) => {
-    res.send(bags);
+    res.sed(bags);
+  }).catch((error) => {
+    res.status(500).send({
+      message: 'An internal error occurred! We\'re doing our best not to let ' +
+        'that happen again.',
+    });
+    console.log(error);
   }).finally(() => {
     dbClient.close();
   });
