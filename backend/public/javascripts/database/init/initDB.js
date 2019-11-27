@@ -13,7 +13,7 @@ async function initDB() {
     await dbClient.connect();
     if (!await isDBExisting(dbClient.DBNAME_PICK_ME)) {
       dbClient.db(dbClient.DBNAME_PICK_ME)
-          .collection(dbClient.TABLE_NAME_BAGS).insertMany(bags);
+          .collection(dbClient.TABLE_NAME_BAG_TEMPLATES).insertMany(bags);
     }
   } finally {
     await dbClient.close();

@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes');
-const bagsRouter = require('./routes/bags');
+const bagTemplatesRouter = require('./routes/bags');
 
 // import swagger
 const yaml = require('yamljs');
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/bags', bagsRouter);
+app.use('/bag_templates', bagTemplatesRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

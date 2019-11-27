@@ -6,7 +6,7 @@ const dbClient = require('../public/javascripts/database/dbClient.js');
 /* GET bags listing. */
 router.get('/', function(req, res) {
   dbClient.connect().then(() => {
-    return dbClient.getBags();
+    return dbClient.getBagTemplates();
   }).then((bags) => {
     res.send(bags);
   }).catch((error) => {

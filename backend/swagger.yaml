@@ -7,15 +7,16 @@ info:
   version: 1.0.0
 
 paths:
-  /bags:
+  /bag_templates:
     get:
-      summary: Returns a list of all bags.
+      summary: Returns a list of all bag templates.
       description: |
-        This resource returns a list of all available bags. These bags are
-        preconfigured with an illustration and a name suggestion.
+        This resource returns a list of all available bag templates. These bag
+        templates are preconfigured bags with an characterizing illustration
+        and a name suggestion.
       responses:
         '200':
-          description: A JSON array of bags.
+          description: A JSON array of bag templates.
           content:
             application/json:
               schema:

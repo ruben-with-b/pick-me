@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 /** The name of the database belonging to the application. */
 const DBNAME_PICK_ME = 'pick_me';
 /** The names of the available tables. */
-const TABLE_NAME_BAGS = 'bags';
+const TABLE_NAME_BAG_TEMPLATES = 'bag_templates';
 /** The uri where the database is hosted. */
 const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}` +
     `@${process.env.DB_HOST}/test?retryWrites=true&w=majority`;
@@ -18,13 +18,13 @@ const dbClient = new MongoClient(URI, {
  * and a name suggestion.
  * @return {Promise<Bag[]>}
  */
-function getBags() {
+function getBagTemplates() {
   return dbClient.db(DBNAME_PICK_ME)
-      .collection(TABLE_NAME_BAGS).find().toArray();
+      .collection(TABLE_NAME_BAG_TEMPLATES).find().toArray();
 }
 
 module.exports = dbClient;
-module.exports.getBags = getBags;
+module.exports.getBagTemplates = getBagTemplates;
 module.exports.DBNAME_PICK_ME = DBNAME_PICK_ME;
-module.exports.TABLE_NAME_BAGS = TABLE_NAME_BAGS;
+module.exports.TABLE_NAME_BAG_TEMPLATES = TABLE_NAME_BAG_TEMPLATES;
 
