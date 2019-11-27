@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
   dbClient.connect().then(() => {
     return dbClient.getBags();
   }).then((bags) => {
-    res.sed(bags);
+    res.send(bags);
   }).catch((error) => {
     res.status(500).send({
       message: 'An internal error occurred! We\'re doing our best not to let ' +
