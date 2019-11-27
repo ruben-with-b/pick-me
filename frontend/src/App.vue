@@ -1,8 +1,26 @@
 <template>
   <div>
     <ul class="bottom-navigation">
-      <li class="nav-item" v-for="(link, index) in links" :key="index">
-        <router-link :to="link.to">{{ link.name }}</router-link>
+      <li class="nav-item">
+        <router-link to="/">
+          <icon-base width="30" height="30">
+            <icon-my-bags />
+          </icon-base>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/account">
+          <icon-base width="30" height="30">
+            <icon-account />
+          </icon-base>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/overview">
+          <icon-base width="50" height="50">
+              <icon-add />
+          </icon-base>
+        </router-link>
       </li>
     </ul>
     <main>
@@ -10,6 +28,23 @@
     </main>
   </div>
 </template>
+
+<script>
+import IconBase from '@/components/IconBase.vue';
+import IconMyBags from '@/assets/icons/IconMyBags.vue';
+import IconAccount from '@/assets/icons/IconAccount.vue';
+import IconAdd from '@/assets/icons/IconAdd.vue';
+
+export default {
+  components: {
+    IconBase,
+    IconMyBags,
+    IconAccount,
+    IconAdd,
+  },
+
+};
+</script>
 
 <style lang="scss" scoped>
   ul.bottom-navigation {
@@ -50,6 +85,10 @@
       height: 2em;
       transform: translate(0.7em,-0.4em);
       font-size: 3em;
+      svg{
+        color: #fff;
+        transform: translate(0em, 0.1em);
+      }
     }
     li{
       width: 100%;
@@ -57,6 +96,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
+
       a {
         text-decoration: none;
         color: black;
@@ -64,27 +104,10 @@
           color: blue;
         }
       }
+
+      svg{
+        color: navy;
+      }
     }
   }
 </style>
-
-<script>
-export default {
-  data: () => ({
-    links: [
-      {
-        name: 'My bags',
-        to: '/',
-      },
-      {
-        name: 'Overview',
-        to: '/overview',
-      },
-      {
-        name: '+',
-        to: '/list',
-      },
-    ],
-  }),
-};
-</script>
