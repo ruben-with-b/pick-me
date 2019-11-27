@@ -1,4 +1,4 @@
-const Bag = require('../../model/Bag');
+const Bag = require('../../model/BagTemplate');
 
 /** Some bags... */
 module.exports = [

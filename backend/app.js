@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes');
-const bagTemplatesRouter = require('./routes/bags');
+const bagTemplatesRouter = require('./routes/bagTemplates');
 
 // import swagger
 const yaml = require('yamljs');

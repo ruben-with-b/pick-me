@@ -1,7 +1,7 @@
 /**
  * Represents a bag.
  */
-class Bag {
+class BagTemplate {
   /**
    * ctor
    * @param {string} name The name of a bag.
@@ -14,4 +14,4 @@ class Bag {
   };
 }
 
-module.exports = Bag;
+module.exports = BagTemplate;
