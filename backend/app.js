@@ -7,6 +7,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes');
 const bagTemplatesRouter = require('./routes/bagTemplates');
+const bagsRouter = require('./routes/bags');
 
 // import swagger
 const yaml = require('yamljs');
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/bag_templates', bagTemplatesRouter);
+app.use('/my_bags', bagsRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

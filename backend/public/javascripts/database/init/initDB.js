@@ -1,6 +1,7 @@
 require('dotenv').config();
 const dbClient = require('../dbClient');
 const bagTemplates = require('./bagTemplates');
+const bags = require('./bags');
 
 initDB();
 
@@ -15,6 +16,9 @@ async function initDB() {
       dbClient.db(dbClient.DBNAME_PICK_ME)
           .collection(dbClient.TABLE_NAME_BAG_TEMPLATES)
           .insertMany(bagTemplates);
+      dbClient.db(dbClient.DBNAME_PICK_ME)
+          .collection(dbClient.TABLE_NAME_BAGS)
+          .insertMany(bags);
     }
   } finally {
     await dbClient.close();
