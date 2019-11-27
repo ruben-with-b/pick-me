@@ -9,6 +9,8 @@ class Bag {
    * the bag.
    */
   constructor(name, illustration) {
+    this.name = name;
+    this.illustration = illustration;
   };
 }
 
