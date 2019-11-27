@@ -8,7 +8,7 @@
     "start:backend": "nodemon ./backend/bin/www",
     "start:frontend": "webpack-dev-server --config webpack.config.js --progress",
     "eslint": "eslint ./",
-    "init": "npm start init:database",
+    "init": "npm run init:database",
     "init:database": "node ./backend/public/javascripts/database/init/initDb.js"
   },
   "dependencies": {
