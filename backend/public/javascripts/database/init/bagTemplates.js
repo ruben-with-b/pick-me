@@ -1,7 +1,7 @@
-const Bag = require('../../model/BagTemplate');
+const BagTemplates = require('../../model/BagTemplate');
 
 /** Some bag templates... */
 module.exports = [
-  new Bag('sports bag', '/images/sportsBag.png'),
-  new Bag('trip bag', '/images/tripBag.png'),
+  new BagTemplates('sports bag', '/images/sportsBag.png'),
+  new BagTemplates('trip bag', '/images/tripBag.png'),
 ];
