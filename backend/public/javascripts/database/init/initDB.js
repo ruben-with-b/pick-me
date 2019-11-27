@@ -1,6 +1,6 @@
 require('dotenv').config();
 const dbClient = require('../dbClient');
-const bags = require('./bags');
+const bags = require('./bagTemplates');
 
 initDB();
 
