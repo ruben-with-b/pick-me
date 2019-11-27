@@ -16,7 +16,7 @@ async function initDB() {
           .collection(dbClient.TABLE_NAME_BAGS).insertMany(bags);
     }
   } finally {
-    dbClient.close();
+    await dbClient.close();
   }
 }
 

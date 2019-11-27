@@ -8,7 +8,6 @@ router.get('/', function(req, res) {
   dbClient.connect().then(() => {
     return dbClient.getBags();
   }).then((bags) => {
-    console.log(bags);
     res.send(bags);
   }).finally(() => {
     dbClient.close();
