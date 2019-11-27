@@ -24,9 +24,7 @@ function getBags() {
 }
 
 module.exports = dbClient;
-module.exports = {
-  getBags,
-  DBNAME_PICK_ME,
-  TABLE_NAME_BAGS,
-};
+module.exports.getBags = getBags;
+module.exports.DBNAME_PICK_ME = DBNAME_PICK_ME;
+module.exports.TABLE_NAME_BAGS = TABLE_NAME_BAGS;
 
