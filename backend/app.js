@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes');
-const usersRouter = require('./routes/users');
+const bagsRouter = require('./routes/bags');
 
 // import swagger
 const yaml = require('yamljs');
@@ -22,23 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/bags', bagsRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-// TEST-CONNECTION-TO-DB--------------------------------------------------------
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}` +
-//     `@${process.env.DB_HOST}/test?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, {useNewUrlParser: true});
-// client.connect().then(() => {
-//   return client.db('sample_airbnb').collection('listingsAndReviews')
-//       .find().toArray();
-// }).then((listingsAndReviews) => {
-//   console.log(listingsAndReviews);
-// }).finally(() => {
-//   client.close();
-// });
-// -----------------------------------------------------------------------------
 
 module.exports = app;
