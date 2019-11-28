@@ -53,37 +53,47 @@ export default {
     align-items: center;
     padding: 0;
     margin: 0 1em 0 0;
-    background: #FFF;
+    background: linear-gradient(to bottom, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', endColorstr='#ffffff', GradientType=0 );
     bottom: 0;
-    right: 0;
+    right: 0.5em;
     position: fixed;
     height: 4em;
-    width: 18em;
+    width: 14em;
     border-top-left-radius: 10em;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
     &:before {
       content: "";
       display: block;
       background: salmon;
       position: absolute;
-      top: -3em;
-      right: -3em;
-      width: 8em;
-      height: 8em;
+      top: -2.5em;
+      right: -2.3em;
+      width: 7em;
+      height: 7em;
       border-radius: 20em;
       z-index: -1;
     }
 
     li:first-child {
-      border-right: 2px solid lightgrey;
+      border-right-width: 2px;
+      border-right-style: solid;
+      border-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0),
+          lightgrey,
+        ) 1 100%;
       margin-left: 1em;
     }
     li:last-child {
       background: navy;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
       border-radius: 20em;
-      width: 7em;
-      height: 2em;
-      transform: translate(0.7em,-0.4em);
+      width: 5em;
+      height: 1.5em;
+      transform: translate(0.2em, -0.3em);
       font-size: 3em;
       svg{
         color: #fff;
