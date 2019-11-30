@@ -9,7 +9,7 @@
     "start:frontend": "webpack-dev-server --config webpack.config.js --progress",
     "eslint": "eslint ./",
     "init": "npm run init:database",
-    "init:database": "node backend/libs/database/init/initDb.js"
+    "init:database": "node backend/libs/pickme/database/init/initDb.js"
   },
   "dependencies": {
     "bulma": "^0.8.0",
