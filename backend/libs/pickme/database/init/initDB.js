@@ -10,16 +10,23 @@ initDB();
  * @return {Promise<void>}
  */
 async function initDB() {
+  await dbClient.connect();
+  const session = dbClient.startSession();
+  session.startTransaction({});
   try {
-    await dbClient.connect();
     if (!await isDBExisting(dbClient.DBNAME_PICK_ME)) {
       dbClient.db(dbClient.DBNAME_PICK_ME)
           .collection(dbClient.TABLE_NAME_BAG_TEMPLATES)
           .insertMany(bagTemplates);
+      console.log('Inserting bag templates successfully finished.');
       dbClient.db(dbClient.DBNAME_PICK_ME)
           .collection(dbClient.TABLE_NAME_BAGS)
           .insertMany(bags);
+      console.log('Inserting bags successfully finished.');
     }
+    await session.commitTransaction();
+  } catch (e) {
+    await session.abortTransaction();
   } finally {
     await dbClient.close();
   }
