@@ -12,6 +12,7 @@ class Bag {
     this.name = name;
     this.illustration = illustration;
     this.content = [];
+    this._id = undefined;
   }
 
   /**

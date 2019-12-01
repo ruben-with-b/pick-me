@@ -1,23 +1,23 @@
 const express = require('express');
+const Database = require('../libs/pickme/database/Database');
 // eslint-disable-next-line new-cap
 const router = express.Router();
-const dbClient = require('../libs/pickme/database/dbClient.js');
 
 /* GET bags listing. */
-router.get('/', function(req, res) {
-  dbClient.connect().then(() => {
-    return dbClient.getBagTemplates();
-  }).then((bags) => {
-    res.send(bags);
-  }).catch((error) => {
+router.get('/', async function(req, res) {
+  const dbClient = await Database.connect();
+  try {
+    const bagTemplates = await dbClient.getBagTemplates();
+    res.send(bagTemplates);
+  } catch (error) {
     res.status(500).send({
       message: 'An internal error occurred! We\'re doing our best not to let ' +
         'that happen again.',
     });
     console.log(error);
-  }).finally(() => {
-    dbClient.close();
-  });
+  } finally {
+    await dbClient.close();
+  }
 });
 
 module.exports = router;

@@ -71,3 +71,107 @@ paths:
                           state:
                             type: boolean
                             description: Describes whether the item is packed or not.
+    post:
+      summary: Create/update a bag.
+      description: |
+        If the bag is nonexistent, the bag is created. If the bag has a known
+        id, the existing bag is updated.
+      requestBody:
+        description: The bag.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: |
+                    (optional) The unique ID of the bag. (This property is only
+                    required, if you want to update an existing bag.)
+                name:
+                  type: string
+                  description: The name of the bag.
+                illustration:
+                  type: string
+                  description: The location of an illustration characterizing the bag.
+                content:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the item.
+                      state:
+                        type: boolean
+                        description: Describes whether the item is packed or not.
+      responses:
+        '200':
+          description: |
+            The bag was successfully created/updated. The response contains
+            the recently created/updated bag. (If a new bag was created, the
+            response contains the id which was assigned to the bag.)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Unique ID of the bag.
+                  name:
+                    type: string
+                    description: The name of the bag.
+                  illustration:
+                    type: string
+                    description: The location of an illustration characterizing the bag.
+                  content:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the item.
+                        state:
+                          type: boolean
+                          description: Describes whether the item is packed or not.
+    delete:
+      summary: Deletes a bag.
+      description: |
+        Deletes the bag with the given id.
+      requestBody:
+        description: The bag to be deleted.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: |
+                    (optional) The unique ID of the bag. (This property is only
+                    required, if you want to update an existing bag.)
+                name:
+                  type: string
+                  description: The name of the bag.
+                illustration:
+                  type: string
+                  description: The location of an illustration characterizing the bag.
+                content:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the item.
+                      state:
+                        type: boolean
+                        description: Describes whether the item is packed or not.
+      responses:
+        '200':
+          description: |
+            If the bag was successfully deleted.

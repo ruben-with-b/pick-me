@@ -22,6 +22,10 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.use('/', indexRouter);
 app.use('/bag_templates', bagTemplatesRouter);
 app.use('/my_bags', bagsRouter);
