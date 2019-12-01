@@ -62,6 +62,7 @@ export default {
     width: 14em;
     border-top-left-radius: 10em;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    z-index: 30;
 
     &:before {
       content: "";

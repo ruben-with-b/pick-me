@@ -3,6 +3,7 @@
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/grid/columns.sass";
 @import url('https://fonts.googleapis.com/css?family=Heebo:900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
 @import "@/assets/breakpoints.scss";
 
 body{
@@ -28,4 +29,11 @@ h1{
     @include xxl {
         font-size: 6rem;
     }
+}
+
+h2{
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: navy;
 }
