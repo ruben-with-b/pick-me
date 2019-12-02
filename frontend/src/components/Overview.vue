@@ -4,7 +4,7 @@
     <hooper :settings="hooperSettings">
        <slide v-for="(slide, indx) in slides" :key="indx" :index="indx">
         <div class="slide-card">
-          <h2>{{ slide.message }}</h2>
+          <h2>{{ slide.name }}</h2>
         </div>
       </slide>
       <hooper-pagination slot="hooper-addons"></hooper-pagination>
@@ -46,7 +46,6 @@
 <script>
 import {Hooper, Slide, Pagination as HooperPagination} from 'hooper';
 import 'hooper/dist/hooper.css';
-// import here eine api json
 
 export default {
   name: 'App',
@@ -57,18 +56,22 @@ export default {
   },
   data() {
     return {
-      slides: [
-        {message: 'Slide 1'},
-        {message: 'Slide 2'},
-        {message: 'Slide 3'},
-        {message: 'Slide 4'},
-      ],
+      slides: undefined,
       hooperSettings: {
         itemsToShow: 1.25,
         infiniteScroll: true,
         transition: 200,
+        centerMode: true,
       },
     };
+  },
+  async mounted() {
+    // fetch API data here
+    const url = 'http://localhost:3000/bag_templates';
+
+    const response = await fetch(url, {method: 'GET'});
+    const data = await response.json();
+    this.slides = data;
   },
 };
 </script>
