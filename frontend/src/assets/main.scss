@@ -8,6 +8,8 @@
 
 body{
     background: salmon;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    color: navy;
     padding: 0;
     margin: 0;
 }
@@ -36,4 +38,10 @@ h2{
     font-size: 1.7rem;
     font-weight: 500;
     color: navy;
+}
+
+button{
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
 }

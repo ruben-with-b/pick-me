@@ -4,7 +4,11 @@
     <hooper :settings="hooperSettings">
        <slide v-for="(slide, indx) in slides" :key="indx" :index="indx">
         <div class="slide-card">
+          <img :src="require('@/assets/1x' + slide.illustration)" :alt="'img of ' + slide.name">
           <h2>{{ slide.name }}</h2>
+          <button class="add-btn">
+            + create list
+          </button>
         </div>
       </slide>
       <hooper-pagination slot="hooper-addons"></hooper-pagination>
@@ -25,6 +29,7 @@
 
   .slide-card{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #fff;
@@ -39,6 +44,15 @@
     width: 9px;
     height: 9px;
     border-radius: 5em;
+  }
+
+  .add-btn{
+    background: navy;
+    border: none;
+    color: #fff;
+    padding: 0.6em 0;
+    border-radius: 15em;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.19), 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 }
 </style>
