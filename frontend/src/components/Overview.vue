@@ -4,7 +4,8 @@
     <hooper :settings="hooperSettings">
        <slide v-for="(slide, indx) in slides" :key="indx" :index="indx">
         <div class="slide-card">
-          <img :src="require('@/assets/1x' + slide.illustration)" :alt="'img of ' + slide.name">
+          <img :src="require('@/assets/1x' + slide.illustration)"
+            :alt="'img of ' + slide.name" class="card-img-big">
           <h2>{{ slide.name }}</h2>
           <button class="add-btn">
             + create list
@@ -48,11 +49,18 @@
 
   .add-btn{
     background: navy;
+    width: 60%;
     border: none;
+    margin: 1em 0 0 0;
     color: #fff;
     padding: 0.6em 0;
     border-radius: 15em;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.19), 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-img-big{
+    width: 70%;
+    margin: 0 0 3em 0;
   }
 }
 </style>
