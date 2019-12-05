@@ -35,8 +35,5 @@ export default {
       prevList: this.prop,
     };
   },
-  mounted() {
-    return console.log(this.lists);
-  },
 };
 </script>
