@@ -51,7 +51,6 @@ module.exports = (env, argv) => ({
           {
             loader: 'url-loader',
             options: {
-              limit: 8192,
               esModule: false,
             },
           },
