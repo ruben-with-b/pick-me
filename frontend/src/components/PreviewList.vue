@@ -2,7 +2,9 @@
   <div class="root">
     <ul>
       <li v-for="(list, indx) in prevList" :key="indx" :index="indx">
-        ✓ {{ prevList[indx].name }}
+        <span v-if="prevList[indx].state === true">&#10003; </span>
+        <span v-if="prevList[indx].state === false">&#10005; </span>
+        {{ prevList[indx].name }}
       </li>
     </ul>
   </div>
