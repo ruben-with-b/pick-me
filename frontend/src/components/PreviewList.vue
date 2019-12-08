@@ -2,7 +2,7 @@
   <div class="root">
     <ul>
       <li v-for="(list, indx) in prevList" :key="indx" :index="indx">
-        {{ prevList[indx].content[indx].name }}
+        ✓ {{ prevList[indx].name }}
       </li>
     </ul>
   </div>
@@ -25,15 +25,18 @@ ul{
 export default {
   name: 'App',
   props: {
-    prop: Array,
+    prop: Object,
   },
   components: {
 
   },
   data() {
     return {
-      prevList: this.prop,
+      prevList: this.prop.content,
+      item: this.item,
     };
+  },
+  mounted() {
   },
 };
 </script>

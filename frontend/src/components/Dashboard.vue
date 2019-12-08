@@ -8,7 +8,7 @@
             :alt="lists.name" class="card-img-small">
           <div class="right-info">
             <h2>{{ lists[indx].name }}</h2>
-            <preview :prop="lists" />
+            <preview :prop="lists[indx]" />
           </div>
         </div>
     </div>
@@ -77,8 +77,7 @@ export default {
     const url = 'http://localhost:3000/my_bags';
 
     const response = await fetch(url, {method: 'GET'});
-    const data = await response.json();
-    this.lists = data;
+    this.lists = await response.json();
   },
 };
 </script>
