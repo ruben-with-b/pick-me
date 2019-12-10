@@ -8,7 +8,7 @@
             :alt="'img of ' + slide.name" class="card-img-big">
           <h2>{{ slide.name }}</h2>
           <button class="add-btn">
-            <router-link to="/list">
+            <router-link :to="{ name: 'List', params: { slide }}">
               <icon-base width="20" height="20">
                 <icon-add />
               </icon-base>

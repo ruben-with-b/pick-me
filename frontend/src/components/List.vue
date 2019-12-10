@@ -1,12 +1,11 @@
 <template>
   <div class="root">
     <div class="header">
-      <img src="@/assets/1x/images/backpack.png"
+      <img :src="require('@/assets/1x' + list.illustration)"
         alt="backpack" class="symbol-img">
     </div>
     <div class="list-body">
-      <input v-model="message" placeholder="sports bag">
-      <p>list title: {{ message }}</p>
+      <input :placeholder="list.name">
     </div>
   </div>
 </template>
@@ -42,4 +41,15 @@
 </style>
 
 <script>
+export default {
+  name: 'App',
+  props: ['slide'],
+  components: {
+  },
+  data() {
+    return {
+      list: this.slide,
+    };
+  },
+};
 </script>

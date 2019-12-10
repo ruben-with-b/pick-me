@@ -27,6 +27,7 @@ export default new Router({
       path: '/list',
       name: 'List',
       component: List,
+      props: true,
     },
     {
       path: '**',
