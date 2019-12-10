@@ -8,7 +8,12 @@
             :alt="'img of ' + slide.name" class="card-img-big">
           <h2>{{ slide.name }}</h2>
           <button class="add-btn">
-            + create list
+            <router-link to="/list">
+              <icon-base width="20" height="20">
+                <icon-add />
+              </icon-base>
+              &nbsp;create list
+            </router-link>
           </button>
         </div>
       </slide>
@@ -16,6 +21,45 @@
     </hooper>
   </div>
 </template>
+
+
+<script>
+import {Hooper, Slide, Pagination as HooperPagination} from 'hooper';
+import IconBase from '@/components/IconBase.vue';
+import IconAdd from '@/assets/icons/IconAdd.vue';
+import 'hooper/dist/hooper.css';
+
+export default {
+  name: 'App',
+  components: {
+    Hooper,
+    Slide,
+    HooperPagination,
+    IconBase,
+    IconAdd,
+  },
+  data() {
+    return {
+      slides: undefined,
+      hooperSettings: {
+        itemsToShow: 1.25,
+        infiniteScroll: true,
+        transition: 200,
+        centerMode: true,
+      },
+    };
+  },
+  async mounted() {
+    // fetch API data here
+    const url = 'http://localhost:3000/bag_templates';
+
+    const response = await fetch(url, {method: 'GET'});
+    const data = await response.json();
+    this.slides = data;
+  },
+};
+</script>
+
 
 <style lang="scss" scoped>
 
@@ -56,6 +100,16 @@
     padding: 0.6em 0;
     border-radius: 15em;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.19), 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    a {
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+        color: #fff;
+        &:hover{
+          color: blue;
+        }
+      }
   }
 
   .card-img-big{
@@ -64,36 +118,3 @@
   }
 }
 </style>
-
-<script>
-import {Hooper, Slide, Pagination as HooperPagination} from 'hooper';
-import 'hooper/dist/hooper.css';
-
-export default {
-  name: 'App',
-  components: {
-    Hooper,
-    Slide,
-    HooperPagination,
-  },
-  data() {
-    return {
-      slides: undefined,
-      hooperSettings: {
-        itemsToShow: 1.25,
-        infiniteScroll: true,
-        transition: 200,
-        centerMode: true,
-      },
-    };
-  },
-  async mounted() {
-    // fetch API data here
-    const url = 'http://localhost:3000/bag_templates';
-
-    const response = await fetch(url, {method: 'GET'});
-    const data = await response.json();
-    this.slides = data;
-  },
-};
-</script>

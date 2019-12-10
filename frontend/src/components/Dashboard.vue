@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root">
     <h1>My Bags</h1>
     <div class="list-container">
         <div v-for="(list, indx) in lists" :key="indx" :index="indx"
@@ -7,7 +7,7 @@
           <img :src="require('@/assets/1x' + lists[indx].illustration)"
             :alt="lists.name" class="card-img-small">
           <div class="right-info">
-            <h2>{{ lists[indx].name }}</h2>
+            <h1>{{ lists[indx].name }}</h1>
             <preview :prop="lists[indx]" />
           </div>
         </div>
@@ -52,8 +52,9 @@
       margin: 0 1em;
       overflow-y: hidden;
 
-      h2{
+      h1{
         font-size: 1.2rem;
+        margin: 1em 0 0.2em 0;
       }
     }
   }
