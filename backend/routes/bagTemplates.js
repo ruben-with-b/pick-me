@@ -15,7 +15,7 @@ router.get('/', async function(req, res) {
       message: 'An internal error occurred! We\'re doing our best not to let ' +
         'that happen again.',
     });
-    console.log(error);
+    console.error(error);
   } finally {
     await dbClient.close();
   }

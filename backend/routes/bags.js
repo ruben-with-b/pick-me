@@ -1,13 +1,12 @@
 const express = require('express');
-const Database = require('../libs/pickme/database/Database');
+const Bags = require('../libs/pickme/logic/Bags');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
 /* GET bags listing. */
 router.get('/', async function(req, res) {
-  const dbClient = await Database.connect();
   try {
-    const bags = await dbClient.getBags();
+    const bags = await Bags.getBags();
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(bags);
   } catch (error) {
@@ -15,9 +14,7 @@ router.get('/', async function(req, res) {
       message: 'An internal error occurred! We\'re doing our best not to let ' +
         'that happen again.',
     });
-    console.log(error);
-  } finally {
-    await dbClient.close();
+    console.error(error);
   }
 });
 
@@ -25,14 +22,12 @@ router.get('/', async function(req, res) {
 router.post('/', async function(req, res) {
   const bag = req.body;
 
-  const dbClient = await Database.connect();
   try {
     let newBag;
     if (bag._id) {
-      await dbClient.updateBag(bag);
-      newBag = bag;
+      newBag = await Bags.updateBag(bag);
     } else {
-      newBag = await dbClient.addBag(bag);
+      newBag = await Bags.addBag(bag);
     }
     res.send(newBag);
   } catch (error) {
@@ -40,9 +35,7 @@ router.post('/', async function(req, res) {
       message: 'An internal error occurred! We\'re doing our best not to let ' +
         'that happen again.',
     });
-    console.log(error);
-  } finally {
-    await dbClient.close();
+    console.error(error);
   }
 });
 
@@ -50,18 +43,15 @@ router.post('/', async function(req, res) {
 router.delete('/', async function(req, res) {
   const bag = req.body;
 
-  const dbClient = await Database.connect();
   try {
-    await dbClient.deleteBag(bag);
+    await Bags.deleteBag(bag);
     res.send();
   } catch (error) {
     res.status(500).send({
       message: 'An internal error occurred! We\'re doing our best not to let ' +
         'that happen again.',
     });
-    console.log(error);
-  } finally {
-    await dbClient.close();
+    console.error(error);
   }
 });
 

@@ -4,7 +4,7 @@ const bagTemplates = require('./bagTemplates');
 const bags = require('./bags');
 
 initDB().catch((error) => {
-  console.log(error);
+  console.error(error);
 });
 
 /**
@@ -13,8 +13,7 @@ initDB().catch((error) => {
  */
 async function initDB() {
   const dbClient = await Database.connect();
-  const session = dbClient.mongoClient.startSession();
-  session.startTransaction({});
+  dbClient.startTransaction();
   try {
     if (!await isDBExisting(dbClient, Database.DBNAME_PICK_ME)) {
       dbClient.mongoClient.db(Database.DBNAME_PICK_ME)
@@ -26,10 +25,7 @@ async function initDB() {
           .insertMany(bags);
       console.log('Inserting bags successfully finished.');
     }
-    await session.commitTransaction();
-  } catch (e) {
-    await session.abortTransaction();
-    throw e;
+    await dbClient.commitTransaction();
   } finally {
     await dbClient.close();
   }

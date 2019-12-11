@@ -35,12 +35,43 @@ class DbClient {
     this.db = mongoClient.db(DBNAME_PICK_ME);
     this.bagTemplatesTable = this.db.collection(TABLE_NAME_BAG_TEMPLATES);
     this.bagsTable = this.db.collection(TABLE_NAME_BAGS);
+    this.session = undefined;
+  }
+
+  /**
+   * Starts a new transaction.
+   */
+  startTransaction() {
+    this.session = this.mongoClient.startSession();
+    this.session.startTransaction({});
+  }
+
+  /**
+   * Commits the active transaction.
+   * @return {Promise<void>}
+   */
+  async commitTransaction() {
+    await this.session.commitTransaction();
+  }
+
+  /**
+   * Aborts the active transaction.
+   * @return {Promise<void>}
+   */
+  async abortTransaction() {
+    await this.session.abortTransaction();
   }
 
   /** Closes the connection to the db. */
   async close() {
+    if (this.session && this.session.inTransaction()) {
+      await this.session.abortTransaction();
+    }
+
     if (this.mongoClient) {
       await this.mongoClient.close();
+    } else {
+      console.error('this.mongoClient undefined!');
     }
   };
 
@@ -55,7 +86,7 @@ class DbClient {
 
   /**
    * Get all bags of the currently authenticated user.
-   * @return {Promise<Bag>}
+   * @return {Promise<Bag[]>}
    */
   getBags() {
     return this.bagsTable.find().toArray();

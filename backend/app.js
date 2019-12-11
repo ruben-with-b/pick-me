@@ -9,6 +9,9 @@ const indexRouter = require('./routes');
 const bagTemplatesRouter = require('./routes/bagTemplates');
 const bagsRouter = require('./routes/bags');
 
+const NotificationScheduler =
+  require('./libs/pickme/logic/NotificationScheduler');
+
 // import swagger
 const yaml = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
@@ -31,5 +34,11 @@ app.use('/bag_templates', bagTemplatesRouter);
 app.use('/my_bags', bagsRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+NotificationScheduler.init().then(() => {
+  console.log('Notification scheduler successfully initialized');
+}).catch((e) => {
+  console.error(e);
+});
 
 module.exports = app;
