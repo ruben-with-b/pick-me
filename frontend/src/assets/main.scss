@@ -6,6 +6,14 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
 @import "@/assets/breakpoints.scss";
 
+// helpers
+
+.flex{
+    display: flex;
+  }
+
+// elements
+
 body{
     background: salmon; // #ef256b
     font-family: 'Roboto', Helvetica, Arial, sans-serif;

@@ -12,6 +12,7 @@
           </div>
         </div>
     </div>
+    <Navigation/>
   </div>
 </template>
 
@@ -63,11 +64,13 @@
 
 <script>
 import Preview from '@/components/PreviewList.vue';
+import Navigation from '@/components/Navigation.vue';
 
 export default {
   name: 'App',
   components: {
     Preview,
+    Navigation,
   },
   data() {
     return {

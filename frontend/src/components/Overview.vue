@@ -19,11 +19,13 @@
       </slide>
       <hooper-pagination slot="hooper-addons"></hooper-pagination>
     </hooper>
+    <Navigation/>
   </div>
 </template>
 
 
 <script>
+import Navigation from '@/components/Navigation.vue';
 import {Hooper, Slide, Pagination as HooperPagination} from 'hooper';
 import IconBase from '@/components/IconBase.vue';
 import IconAdd from '@/assets/icons/IconAdd.vue';
@@ -32,6 +34,7 @@ import 'hooper/dist/hooper.css';
 export default {
   name: 'App',
   components: {
+    Navigation,
     Hooper,
     Slide,
     HooperPagination,

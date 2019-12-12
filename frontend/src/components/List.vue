@@ -19,24 +19,29 @@
             <button @click="removeTask(index)">X</button>
           </li>
         </ul>
-        <form v-on:submit.prevent="addNewListItem">
+        <form class="flex newItem" v-on:submit.prevent="addNewListItem">
           <input
+            class="listitem-input"
             v-model="newPackItem"
             id="new-item"
             placeholder="Add list item"
           >
-          <button>Add</button>
+          <button>&#10003;</button>
         </form>
       </div>
     </div>
+    <NavigationList/>
   </div>
 </template>
 
 <script>
+import NavigationList from '@/components/NavigationList.vue';
+
 export default {
   name: 'App',
   props: ['slide', 'newItem'],
   components: {
+    NavigationList,
   },
   data() {
     return {
@@ -121,8 +126,27 @@ export default {
       margin: 3em 0 0 0;
       padding: 0;
       font-size: 1.3rem;
-      line-height: 1.7rem;
+      line-height: 2.3rem;
 
+      button{
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+
+    .listitem-input{
+      margin: 0 0 0 1.4rem;
+      width: auto;
+      border:none;
+      border-bottom: 1px solid #fff;
+      background-image:none;
+      background-color:transparent;
+      box-shadow: none;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .newItem{
       button{
         color: #fff;
         cursor: pointer;
