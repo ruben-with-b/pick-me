@@ -8,31 +8,72 @@
       <div class="packlist-wrapper">
         <input class="listname-input" :value="list.name">
         <ul class="packlist">
-          <li>
+          <li
+            v-for="(item, index) in packlist"
+            :key="item.id"
+            :title="item.title"
+            @remove="this.packlist.splice(index, 1)"
+          >
             <input type="checkbox">
-            item 1
-            <button>X</button>
-          </li>
-          <li>
-            <input type="checkbox">
-            item 2
-            <button>X</button>
-          </li>
-          <li>
-            <input type="checkbox">
-            item 3
-            <button>X</button>
-          </li>
-          <li>
-            <input type="checkbox">
-            item 4
-            <button>X</button>
+            {{ item.newItem }}
+            <button @click="removeTask(index)">X</button>
           </li>
         </ul>
+        <form v-on:submit.prevent="addNewListItem">
+          <input
+            v-model="newPackItem"
+            id="new-item"
+            placeholder="Add list item"
+          >
+          <button>Add</button>
+        </form>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  props: ['slide', 'newItem'],
+  components: {
+  },
+  data() {
+    return {
+      list: this.slide,
+      newTodoText: '',
+      newPackItem: '',
+      packlist: [ // api data?
+        {
+          id: 1,
+          newItem: 'Do the dishes',
+        },
+        {
+          id: 2,
+          newItem: 'Take out the trash',
+        },
+        {
+          id: 3,
+          newItem: 'Mow the lawn',
+        },
+      ],
+      nextItemId: 4,
+    };
+  },
+  methods: {
+    addNewListItem() {
+      this.packlist.push({
+        id: this.nextItemId++,
+        newItem: this.newPackItem,
+      });
+      this.newTodoText = '';
+    },
+    removeTask(index) {
+      this.packlist.splice(index, 1);
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 
@@ -89,19 +130,4 @@
     }
   }
 }
-
 </style>
-
-<script>
-export default {
-  name: 'App',
-  props: ['slide'],
-  components: {
-  },
-  data() {
-    return {
-      list: this.slide,
-    };
-  },
-};
-</script>
