@@ -8,7 +8,6 @@ router.get('/', async function(req, res) {
   const dbClient = await Database.connect();
   try {
     const bagTemplates = await dbClient.getBagTemplates();
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(bagTemplates);
   } catch (error) {
     res.statusCode = 500;

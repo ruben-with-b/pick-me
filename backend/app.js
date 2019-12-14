@@ -29,6 +29,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Enable deploying the frontend and backend with two different ports at the
+// same machine.
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Pass to next layer of middleware
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/bag_templates', bagTemplatesRouter);
 app.use('/my_bags', bagsRouter);

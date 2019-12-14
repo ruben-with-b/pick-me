@@ -9,7 +9,6 @@ const router = express.Router();
 router.get('/', async function(req, res) {
   try {
     const bags = await Bags.getBags();
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(bags);
   } catch (error) {
     res.statusCode = 500;
@@ -109,7 +108,6 @@ router.get('/:id/share_on_whatsapp', async function(req, res) {
       const bag = await Bags.getBag(bagId);
       if (bag) {
         const msg = WhatsAppMsgBuilder.buildMsg(bag);
-        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(msg);
       } else {
         res.statusCode = 404;
