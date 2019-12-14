@@ -30,7 +30,7 @@
         </form>
       </div>
     </div>
-    <NavigationList/>
+    <NavigationList @send="saveList"/>
   </div>
 </template>
 
@@ -48,21 +48,8 @@ export default {
       list: this.slide,
       newTodoText: '',
       newPackItem: '',
-      packlist: [ // api data?
-        {
-          id: 1,
-          newItem: 'Do the dishes',
-        },
-        {
-          id: 2,
-          newItem: 'Take out the trash',
-        },
-        {
-          id: 3,
-          newItem: 'Mow the lawn',
-        },
-      ],
-      nextItemId: 4,
+      packlist: [], // object
+      nextItemId: 1,
     };
   },
   methods: {
@@ -75,6 +62,24 @@ export default {
     },
     removeTask(index) {
       this.packlist.splice(index, 1);
+    },
+    async saveList() {
+      const url = 'http://localhost:3000/my_bags';
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: new Headers(),
+        body: JSON.stringify(this.packlist),
+      });
+      const output = await response.json();
+      console.log(output);
+
+      // fetch('https://jsonplaceholder.typicode.com/posts', {
+      //             method: 'POST',
+      //             headers : new Headers(),
+      //             body:JSON.stringify({tittle:tittle, body:body})
+      //         }).then((res) => res.json())
+      //         .then((data) =>  console.log(data))
+      //         .catch((err)=>console.log(err))
     },
   },
 };

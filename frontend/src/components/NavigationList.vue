@@ -16,7 +16,7 @@
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/overview">
+        <router-link to="" @click.native="sendList()">
           <icon-base width="50" height="50">
               <icon-add />
           </icon-base>
@@ -25,6 +25,38 @@
     </ul>
   </div>
 </template>
+
+<script>
+import IconBase from '@/components/IconBase.vue';
+import IconMyBags from '@/assets/icons/IconMyBags.vue';
+import IconAccount from '@/assets/icons/IconAccount.vue';
+import IconAdd from '@/assets/icons/IconAdd.vue';
+
+export default {
+  name: 'App',
+  components: {
+    IconBase,
+    IconMyBags,
+    IconAccount,
+    IconAdd,
+  },
+  created() {
+  },
+  data() {
+    return {
+
+    };
+  },
+  methods: {
+    sendList() {
+      this.$emit('send');
+    },
+  },
+  mounted() {
+
+  },
+};
+</script>
 
 <style lang="scss" scoped>
   ul.bottom-navigation {
@@ -102,28 +134,3 @@
     }
   }
 </style>
-
-<script>
-import IconBase from '@/components/IconBase.vue';
-import IconMyBags from '@/assets/icons/IconMyBags.vue';
-import IconAccount from '@/assets/icons/IconAccount.vue';
-import IconAdd from '@/assets/icons/IconAdd.vue';
-
-export default {
-  name: 'App',
-  components: {
-    IconBase,
-    IconMyBags,
-    IconAccount,
-    IconAdd,
-  },
-  data() {
-    return {
-
-    };
-  },
-  mounted() {
-
-  },
-};
-</script>

@@ -29,6 +29,7 @@ router.post('/', async function(req, res) {
     } else {
       newBag = await Bags.addBag(bag);
     }
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(newBag);
   } catch (error) {
     res.status(500).send({
@@ -45,6 +46,7 @@ router.delete('/', async function(req, res) {
 
   try {
     await Bags.deleteBag(bag);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.send();
   } catch (error) {
     res.status(500).send({
