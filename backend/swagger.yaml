@@ -149,22 +149,48 @@ paths:
                         state:
                           type: boolean
                           description: Describes whether the item is packed or not.
+  /my_bags/{id}:
     delete:
       summary: Deletes a bag.
       description: |
         Deletes the bag with the given id.
-      requestBody:
-        description: The bag to be deleted.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                _id:
-                  type: string
-                  description: The unique ID of the bag to be deleted.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the bag to be deleted
       responses:
         '200':
           description: |
-            If the bag was successfully deleted.
+            If the bag has successfully been deleted.
+  /my_bags/{id}/share_on_whatsapp:
+    get:
+      summary: |
+        Share a bag on whatsapp.
+      description: |
+        This resource delivers a custom whatsapp uri. Opened in a broser the
+        uri starts whatsapp. After that it inserts an text representation of
+        the bag in a new message. This allows the user to share a bag on
+        whatsapp.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the bag to be shared.
+      responses:
+        '200':
+          description: |
+            The uri has been created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uri:
+                    type: string
+                    description: Whatsapp custom uri.
+

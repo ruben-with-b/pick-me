@@ -55,16 +55,32 @@ class Bags {
 
   /**
    * Deletes an existing bag.
-   * @param {Bag} bag An existing bag (must contain an id).
-   * @return {Promise<void>}
+   * @param {string} bagId The id of an existing bag.
+   * @return {Promise<boolean>}
+   * True, if a bag has been deleted, otherwise false.
    */
-  static async deleteBag(bag) {
+  static async deleteBag(bagId) {
     const dbClient = await Database.connect();
     dbClient.startTransaction();
     try {
-      await dbClient.deleteBag(bag);
-      NotificationScheduler.abortScheduledNotification(bag);
+      const itemDeleted = await dbClient.deleteBag(bagId);
+      NotificationScheduler.abortScheduledNotification(bagId);
       await dbClient.commitTransaction();
+      return itemDeleted;
+    } finally {
+      await dbClient.close();
+    }
+  }
+
+  /**
+   * Get bag by id.
+   * @param {string} bagId The id of the bag.
+   * @return {Promise<Bag>} The Bag.
+   */
+  static async getBag(bagId) {
+    const dbClient = await Database.connect();
+    try {
+      return dbClient.getBag(bagId);
     } finally {
       await dbClient.close();
     }

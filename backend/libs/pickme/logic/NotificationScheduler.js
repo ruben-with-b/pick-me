@@ -17,7 +17,7 @@ class NotificationScheduler {
     const dueDate = bag.dueDate ? new Date(bag.dueDate) : undefined;
     if (!dueDate || dueDate < now) {
       // Abort already scheduled notifications.
-      NotificationScheduler.abortScheduledNotification(bag);
+      NotificationScheduler.abortScheduledNotification(bag._id);
       return;
     }
 
@@ -45,13 +45,13 @@ class NotificationScheduler {
 
   /**
    * Aborts the already scheduled notification of the specified bag.
-   * @param {Bag} bag The bag.
+   * @param {string} bagId The id of an existing bag.
    */
-  static abortScheduledNotification(bag) {
-    const cronJob = NotificationScheduler.bag2scheduler.get(bag._id);
+  static abortScheduledNotification(bagId) {
+    const cronJob = NotificationScheduler.bag2scheduler.get(bagId);
     if (cronJob) {
       cronJob.stop();
-      NotificationScheduler.bag2scheduler.delete(bag._id);
+      NotificationScheduler.bag2scheduler.delete(bagId);
     }
   }
 

@@ -11,7 +11,8 @@ router.get('/', async function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.send(bagTemplates);
   } catch (error) {
-    res.status(500).send({
+    res.statusCode = 500;
+    res.send({
       message: 'An internal error occurred! We\'re doing our best not to let ' +
         'that happen again.',
     });

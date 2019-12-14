@@ -23,6 +23,20 @@ const connect = async function() {
 };
 
 /**
+ * Checks whether id is a valid ObjectId.
+ * @param {string} id The id to be checked.
+ * @return {Promise<boolean>} True, if the id is valid, otherwise false.
+ */
+const isObjectIdValid = async function(id) {
+  try {
+    objectId(id);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
+/**
  * Is used to run some operations on the database.
  */
 class DbClient {
@@ -85,6 +99,15 @@ class DbClient {
   }
 
   /**
+   * Get the bag with the specified id.
+   * @param {string} id The id of the bag to be fetched.
+   * @return {Bag} The bag.
+   */
+  getBag(id) {
+    return this.bagsTable.findOne({'_id': objectId(id)});
+  }
+
+  /**
    * Get all bags of the currently authenticated user.
    * @return {Promise<Bag[]>}
    */
@@ -106,11 +129,13 @@ class DbClient {
 
   /**
    * Deletes a bag.
-   * @param {Bag} bag The bag to be removed.
-   * @return {Promise<void>}
+   * @param {string} bagId The id of an existing bag.
+   * @return {Promise<boolean>}
+   * True, if a bag has been deleted, otherwise false.
    */
-  async deleteBag(bag) {
-    await this.bagsTable.deleteOne({'_id': objectId(bag._id)});
+  async deleteBag(bagId) {
+    const result = await this.bagsTable.deleteOne({'_id': objectId(bagId)});
+    return result.deletedCount > 0;
   }
 
   /**
@@ -129,6 +154,7 @@ class DbClient {
 
 module.exports.DbClient = DbClient;
 module.exports.connect = connect;
+module.exports.isObjectIdValid = isObjectIdValid;
 module.exports.DBNAME_PICK_ME = DBNAME_PICK_ME;
 module.exports.TABLE_NAME_BAGS = TABLE_NAME_BAGS;
 module.exports.TABLE_NAME_BAG_TEMPLATES = TABLE_NAME_BAG_TEMPLATES;
