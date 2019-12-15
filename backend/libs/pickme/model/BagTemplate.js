@@ -1,5 +1,5 @@
 /**
- * Represents a bag template.
+ * Represents a bag-template.
  */
 class BagTemplate {
   /**

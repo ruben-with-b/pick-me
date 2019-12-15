@@ -45,10 +45,12 @@ const create = function(rawBag) {
 
   bag._id = rawBag._id;
 
+  // Each bag must have a name.
   if (!bag.name) {
     return undefined;
   }
 
+  // Each item must have a name and state.
   bag.content.forEach((item) => {
     if (!item.name || !item.state) {
       return undefined;
