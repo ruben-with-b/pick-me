@@ -6,6 +6,13 @@ const Database = require('../libs/pickme/database/Database');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+/** Some predefined messages. */
+const INTERNAL_ERROR_MSG = 'An internal error occurred! We\'re doing our ' +
+  'best not to let that happen again.';
+const invalidObjectIdMsg = (id) => {
+  return `ID '${id}' is invalid ObjectId.`;
+};
+
 /* GET bags listing. */
 router.get('/', async function(req, res) {
   try {
@@ -14,8 +21,7 @@ router.get('/', async function(req, res) {
   } catch (error) {
     res.statusCode = 500;
     res.send({
-      message: 'An internal error occurred! We\'re doing our best not to let ' +
-        'that happen again.',
+      message: INTERNAL_ERROR_MSG,
     });
     console.error(error);
   }
@@ -38,8 +44,7 @@ router.post('/', async function(req, res) {
         // Invalid ID
         res.statusCode = 400;
         res.send({
-          message:
-            `ID '${bag._id}' is invalid ObjectId.`,
+          message: invalidObjectIdMsg(bag._id),
         });
       } else if (await Bags.getBag(bag._id)) {
         // Bag exists. Update it!
@@ -62,14 +67,13 @@ router.post('/', async function(req, res) {
   } catch (error) {
     res.statusCode = 500;
     res.send({
-      message: 'An internal error occurred! We\'re doing our best not to let ' +
-        'that happen again.',
+      message: INTERNAL_ERROR_MSG,
     });
     console.error(error);
   }
 });
 
-/* Create a new bag. If the request contains an existing bag, it is updated. */
+/* Deletes a bag. */
 router.delete('/:id', async function(req, res) {
   const bagId = req.params.id;
 
@@ -78,8 +82,7 @@ router.delete('/:id', async function(req, res) {
       // Invalid ID
       res.statusCode = 400;
       res.send({
-        message:
-          `ID '${bagId}' is invalid ObjectId.`,
+        message: invalidObjectIdMsg(bagId),
       });
     } else if (await Bags.deleteBag(bagId)) {
       res.send();
@@ -92,14 +95,13 @@ router.delete('/:id', async function(req, res) {
   } catch (error) {
     res.statusCode = 500;
     res.send({
-      message: 'An internal error occurred! We\'re doing our best not to let ' +
-        'that happen again.',
+      message: INTERNAL_ERROR_MSG,
     });
     console.error(error);
   }
 });
 
-/* GET bags listing. */
+/* Get uri which allows sharing a bag on whatsapp. */
 router.get('/:id/share_on_whatsapp', async function(req, res) {
   const bagId = req.params.id;
   try {
@@ -107,8 +109,7 @@ router.get('/:id/share_on_whatsapp', async function(req, res) {
       // Invalid ID
       res.statusCode = 400;
       res.send({
-        message:
-          `ID '${bagId}' is invalid ObjectId.`,
+        message: invalidObjectIdMsg(bagId),
       });
     } else {
       const bag = await Bags.getBag(bagId);
@@ -125,8 +126,7 @@ router.get('/:id/share_on_whatsapp', async function(req, res) {
   } catch (error) {
     res.statusCode = 500;
     res.send({
-      message: 'An internal error occurred! We\'re doing our best not to let ' +
-        'that happen again.',
+      message: INTERNAL_ERROR_MSG,
     });
     console.error(error);
   }

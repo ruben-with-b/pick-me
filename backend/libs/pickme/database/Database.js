@@ -49,7 +49,6 @@ class DbClient {
     this.db = mongoClient.db(DBNAME_PICK_ME);
     this.bagTemplatesTable = this.db.collection(TABLE_NAME_BAG_TEMPLATES);
     this.bagsTable = this.db.collection(TABLE_NAME_BAGS);
-    this.session = undefined;
   }
 
   /**
