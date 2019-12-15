@@ -1,6 +1,6 @@
 const express = require('express');
 const Bags = require('../libs/pickme/logic/Bags');
-const Bag = require('../libs/pickme/model/bag/Bag');
+const BagFactory = require('../libs/pickme/logic/BagFactory');
 const WhatsAppMsgBuilder = require('../libs/pickme/logic/WhatsAppMsgBuilder');
 const Database = require('../libs/pickme/database/Database');
 // eslint-disable-next-line new-cap
@@ -30,7 +30,7 @@ router.get('/', async function(req, res) {
 /* Create a new bag. If the request contains an existing bag, it is updated. */
 router.post('/', async function(req, res) {
   try {
-    const bag = Bag.create(req.body);
+    const bag = BagFactory.create(req.body);
     if (!bag) {
       res.statusCode = 400;
       res.send({

@@ -1,5 +1,3 @@
-const Item = require('./Item');
-
 /**
  * Represents a particular bag.
  */
@@ -29,36 +27,4 @@ class Bag {
   }
 }
 
-/**
- * Creates bag from any object you assume to be a bag. If the given object
- * is no bag you will get 'undefined'.
- * @param {any} rawBag Something you assume to be a bag.
- * @return {Bag|undefined} Bag or 'undefined'.
- */
-const create = function(rawBag) {
-  const bag = new Bag(rawBag.name, rawBag.illustration, rawBag.dueDate);
-  if (rawBag.content && Array.isArray(rawBag.content)) {
-    rawBag.content.forEach((item) => {
-      bag.addItem(new Item(item.name, item.state));
-    });
-  }
-
-  bag._id = rawBag._id;
-
-  // Each bag must have a name.
-  if (!bag.name) {
-    return undefined;
-  }
-
-  // Each item must have a name and state.
-  bag.content.forEach((item) => {
-    if (!item.name || !item.state) {
-      return undefined;
-    }
-  });
-
-  return bag;
-};
-
 module.exports = Bag;
-module.exports.create = create;
