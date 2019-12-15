@@ -11,6 +11,11 @@ class BagFactory {
    */
   static create(rawBag) {
     const bag = new Bag(rawBag.name, rawBag.illustration, rawBag.dueDate);
+
+    if (rawBag.content && !Array.isArray(rawBag.content)) {
+      return undefined;
+    }
+
     if (rawBag.content && Array.isArray(rawBag.content)) {
       rawBag.content.forEach((item) => {
         bag.addItem(new Item(item.name, item.state));
@@ -25,13 +30,11 @@ class BagFactory {
     }
 
     // Each item must have a name and state.
-    bag.content.forEach((item) => {
-      if (!item.name || !item.state) {
-        return undefined;
-      }
+    const itemIsInvalid = bag.content.some((item) => {
+      return item.name === undefined || item.state === undefined;
     });
 
-    return bag;
+    return itemIsInvalid ? undefined : bag;
   };
 }
 
