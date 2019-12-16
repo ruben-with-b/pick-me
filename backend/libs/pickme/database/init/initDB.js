@@ -16,13 +16,13 @@ async function initDB() {
   const dbClient = await Database.connect();
   dbClient.startTransaction();
   try {
-    if (!await isDBExisting(dbClient, Database.DBNAME_PICK_ME)) {
-      dbClient.mongoClient.db(Database.DBNAME_PICK_ME)
-          .collection(Database.TABLE_NAME_BAG_TEMPLATES)
+    if (!await isDBExisting(dbClient, process.env.DB_NAME)) {
+      dbClient.mongoClient.db(process.env.DB_NAME)
+          .collection(process.env.DB_TABLE_NAME_BAG_TEMPLATES)
           .insertMany(bagTemplates);
       console.log('Inserting bag templates successfully finished.');
-      dbClient.mongoClient.db(Database.DBNAME_PICK_ME)
-          .collection(Database.TABLE_NAME_BAGS)
+      dbClient.mongoClient.db(process.env.DB_NAME)
+          .collection(process.env.DB_TABLE_NAME_BAGS)
           .insertMany(bags);
       console.log('Inserting bags successfully finished.');
     }
