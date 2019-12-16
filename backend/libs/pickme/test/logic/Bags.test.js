@@ -66,8 +66,8 @@ test('Update bag', async (done) => {
     jest.spyOn(NotificationScheduler, 'scheduleNotification');
 
   // ACT
-  const returnValueUpdate = (await Bags.updateBag(bag)).value;
-  const returnValueGet = (await Bags.getBag(bag._id)).value;
+  const returnValueUpdate = await Bags.updateBag(bag);
+  const returnValueGet = await Bags.getBag(bag._id);
 
   // CHECK
   expect(returnValueUpdate).toEqual(bag);
@@ -84,11 +84,9 @@ test('Update malformed bag', async (done) => {
     jest.spyOn(NotificationScheduler, 'scheduleNotification');
 
   // ACT
-  const actualResult = await Bags.updateBag(malFormedBag);
+  expect(Bags.updateBag(malFormedBag)).rejects.toThrow();
 
   // CHECK
-  expect(actualResult.error).toBeDefined();
-  expect(actualResult.value).not.toBeDefined();
   expect(scheduleNotification).not.toHaveBeenCalled();
   done();
 });
@@ -102,7 +100,7 @@ test('Add bag', async (done) => {
     jest.spyOn(NotificationScheduler, 'scheduleNotification');
 
   // ACT
-  const newBag = (await Bags.addBag(additionalBag)).value;
+  const newBag = await Bags.addBag(additionalBag);
 
   // CHECK
   const newBagWithoutId = {...newBag};
@@ -122,12 +120,9 @@ test('Add malformed bag', async (done) => {
   const malFormedBag = new Bag(undefined, 'illustration', undefined);
 
   // ACT
-  const actualResult = await Bags.addBag(malFormedBag);
+  expect(Bags.addBag(malFormedBag)).rejects.toThrow();
 
   // CHECK
-  expect(actualResult.error).toBeDefined();
-  expect(actualResult.value).not.toBeDefined();
-
   const allBags = await Bags.getBags();
   expect(allBags.length).toBe(2);
   done();
@@ -141,12 +136,12 @@ test('Delete bag', async (done) => {
     jest.spyOn(NotificationScheduler, 'abortScheduledNotification');
 
   // ACT
-  const hasBeenDeleted = (await Bags.deleteBag(toBeDeleted._id)).value;
+  const hasBeenDeleted = await Bags.deleteBag(toBeDeleted._id);
 
   // CHECK
   expect(hasBeenDeleted).toBe(true);
 
-  const returnValueGet = (await Bags.getBag(toBeDeleted._id)).value;
+  const returnValueGet = await Bags.getBag(toBeDeleted._id);
   expect(returnValueGet).not.toBeDefined();
 
   expect(abortScheduledNotification).toHaveBeenCalledWith(toBeDeleted._id);
@@ -163,12 +158,9 @@ test('Pass invalid ObjectId to delete', async (done) => {
     jest.spyOn(NotificationScheduler, 'abortScheduledNotification');
 
   // ACT
-  const actualResult = (await Bags.deleteBag('klsjdfkj'));
+  expect(Bags.deleteBag('klsjdfkj')).rejects.toThrow();
 
   // CHECK
-  expect(actualResult.error).toBeDefined();
-  expect(actualResult.value).toBe(false);
-
   expect(abortScheduledNotification).not.toHaveBeenCalled();
 
   const allBags = await Bags.getBags();
@@ -186,11 +178,10 @@ test('Delete non-existent bag', async (done) => {
     jest.spyOn(NotificationScheduler, 'abortScheduledNotification');
 
   // ACT
-  const actualResult = (await Bags.deleteBag(toBeDeleted._id));
+  const actualResult = await Bags.deleteBag(toBeDeleted._id);
 
   // CHECK
-  expect(actualResult.error).not.toBeDefined();
-  expect(actualResult.value).toBe(false);
+  expect(actualResult).toBe(false);
 
   expect(abortScheduledNotification).not.toHaveBeenCalled();
 
@@ -204,21 +195,17 @@ test('Get bag', async (done) => {
   const bag = (await Bags.getBags())[0];
 
   // ACT
-  const actualResult = (await Bags.getBag(bag._id));
+  const actualResult = await Bags.getBag(bag._id);
 
   // CHECK
-  expect(actualResult.error).not.toBeDefined();
-  expect(actualResult.value).toEqual(bag);
+  expect(actualResult).toEqual(bag);
   done();
 });
 
 test('Pass invalid ObjectId to get', async (done) => {
   // ACT
-  const actualResult = (await Bags.getBag('sdf'));
+  expect(Bags.getBag('sdf')).rejects.toThrow();
 
-  // CHECK
-  expect(actualResult.error).toBeDefined();
-  expect(actualResult.value).not.toBeDefined();
   done();
 });
 
@@ -228,10 +215,9 @@ test('Get non-existent bag', async (done) => {
   await Bags.deleteBag(bag._id);
 
   // ACT
-  const actualResult = (await Bags.getBag(bag._id));
+  const actualResult = await Bags.getBag(bag._id);
 
   // CHECK
-  expect(actualResult.error).not.toBeDefined();
-  expect(actualResult.value).not.toBeDefined();
+  expect(actualResult).not.toBeDefined();
   done();
 });

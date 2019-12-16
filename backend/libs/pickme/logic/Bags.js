@@ -21,16 +21,13 @@ class Bags {
   /**
    * Updates an existing bag.
    * @param {Bag} rawBag An existing bag (must contain an id).
-   * @return {Promise<{error: Error, value: Bag}>}
+   * @return {Promise<Bag>}
    * The new version of the bag.
    */
   static async updateBag(rawBag) {
     const bag = BagFactory.create(rawBag);
     if (!bag) {
-      return {
-        error: new Error(`${rawBag} is malformed Bag`),
-        value: undefined,
-      };
+      throw new Error(`${rawBag} is malformed Bag`);
     }
 
     const dbClient = await Database.connect();
@@ -39,7 +36,7 @@ class Bags {
       await dbClient.updateBag(bag);
       NotificationScheduler.scheduleNotification(bag);
       await dbClient.commitTransaction();
-      return {value: bag};
+      return bag;
     } finally {
       await dbClient.close();
     }
@@ -48,16 +45,13 @@ class Bags {
   /**
    * Adds a new bag.
    * @param {Bag} rawBag An existing bag (must not contain an id).
-   * @return {Promise<{error: Error, value: Bag}>}
+   * @return {Promise<Bag>}
    * The newly created bag (contains the assigned id).
    */
   static async addBag(rawBag) {
     const bag = BagFactory.create(rawBag);
     if (!bag) {
-      return {
-        error: new Error(`${rawBag} is malformed Bag`),
-        value: undefined,
-      };
+      throw new Error(`${rawBag} is malformed Bag`);
     }
 
     const dbClient = await Database.connect();
@@ -66,7 +60,7 @@ class Bags {
       const newBag = await dbClient.addBag(bag);
       NotificationScheduler.scheduleNotification(bag);
       await dbClient.commitTransaction();
-      return {value: newBag};
+      return newBag;
     } finally {
       await dbClient.close();
     }
@@ -75,15 +69,12 @@ class Bags {
   /**
    * Deletes an existing bag.
    * @param {string} bagId The id of an existing bag.
-   * @return {Promise<{error: Error, value: boolean}>}
+   * @return {Promise<boolean>}
    * True, if a bag has been deleted, otherwise false.
    */
   static async deleteBag(bagId) {
     if (!await Database.isObjectIdValid(bagId)) {
-      return {
-        error: new Error(`${bagId} is invalid ObjectId`),
-        value: false,
-      };
+      throw new Error(`${bagId} is invalid ObjectId`);
     }
 
     const dbClient = await Database.connect();
@@ -94,9 +85,7 @@ class Bags {
         NotificationScheduler.abortScheduledNotification(bagId);
       }
       await dbClient.commitTransaction();
-      return {
-        value: itemDeleted,
-      };
+      return itemDeleted;
     } finally {
       await dbClient.close();
     }
@@ -105,25 +94,21 @@ class Bags {
   /**
    * Get bag by id.
    * @param {string} bagId The id of the bag.
-   * @return {Promise<{error: Error, value: Bag}>}
+   * @return {Promise<Bag>}
    * Bag or undefined, if there is no bag with the specified id.
    */
   static async getBag(bagId) {
     if (!await Database.isObjectIdValid(bagId)) {
-      return {
-        error: new Error(`${bagId} is invalid ObjectId`),
-        value: undefined,
-      };
+      throw new Error(`${bagId} is invalid ObjectId`);
     }
 
     const dbClient = await Database.connect();
     try {
       const rawBag = await dbClient.getBag(bagId);
       if (rawBag) {
-        const bag = await BagFactory.create(rawBag);
-        return {value: bag};
+        return await BagFactory.create(rawBag);
       } else {
-        return {value: undefined};
+        return undefined;
       }
     } finally {
       await dbClient.close();

@@ -84,13 +84,16 @@ router.delete('/:id', async function(req, res) {
       res.send({
         message: invalidObjectIdMsg(bagId),
       });
-    } else if (await Bags.deleteBag(bagId)) {
-      res.send();
     } else {
-      res.statusCode = 404;
-      res.send({
-        message: `Bag with ID '${bagId}' does not exist.`,
-      });
+      const hasBeenDeleted = await Bags.deleteBag(bagId);
+      if (hasBeenDeleted) {
+        res.send();
+      } else {
+        res.statusCode = 404;
+        res.send({
+          message: `Bag with ID '${bagId}' does not exist.`,
+        });
+      }
     }
   } catch (error) {
     res.statusCode = 500;
@@ -112,8 +115,7 @@ router.get('/:id/share_on_whatsapp', async function(req, res) {
         message: invalidObjectIdMsg(bagId),
       });
     } else {
-      const bag = await Bags.getBag(bagId);
-      if (bag) {
+      if (await Bags.getBag(bagId)) {
         const msg = WhatsAppMsgBuilder.buildMsg(bag);
         res.send(msg);
       } else {
