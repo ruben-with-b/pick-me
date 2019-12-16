@@ -43,7 +43,10 @@ class DbClient {
     await this.session.abortTransaction();
   }
 
-  /** Closes the connection to the db. */
+  /**
+   * Closes the connection to the db.
+   * @return {Promise<void>}
+   */
   async close() {
     if (this.session && this.session.inTransaction()) {
       await this.session.abortTransaction();
@@ -68,24 +71,24 @@ class DbClient {
   /**
    * Get the bag with the specified id.
    * @param {string} id The id of the bag to be fetched.
-   * @return {Bag} The bag.
+   * @return {Promise<Bag>} The bag.
    */
-  getBag(id) {
-    return this.bagsTable.findOne({'_id': objectId(id)});
+  async getBag(id) {
+    return await this.bagsTable.findOne({'_id': objectId(id)});
   }
 
   /**
    * Get all bags of the currently authenticated user.
    * @return {Promise<Bag[]>}
    */
-  getBags() {
-    return this.bagsTable.find().toArray();
+  async getBags() {
+    return await this.bagsTable.find().toArray();
   }
 
   /**
    * Adds a new bag.
    * @param {Bag} bag
-   * @return {Bag} The created bag (including the assigned).
+   * @return {Promise<Bag>} The created bag (including the assigned).
    */
   async addBag(bag) {
     bag._id = await this.bagsTable.insertOne(bag).then((result) => {
