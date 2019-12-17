@@ -1,6 +1,7 @@
 const CronJob = require('cron').CronJob;
 const Database = require('../database/Database');
 const {EventEmitter} = require('events');
+const BagFactory = require('../logic/BagFactory');
 
 /**
  * Sends notifications when a bag is due.
@@ -20,9 +21,15 @@ class NotificationScheduler extends EventEmitter {
    * If items are unpacked at the due date, the user is notified.
    * If the bag does not have a due date already scheduled notifications
    * are aborted.
-   * @param {Bag} bag The bag for which a notification should be set scheduled.
+   * @param {Bag} rawBag The bag for which a notification should be set
+   * scheduled.
    */
-  scheduleNotification(bag) {
+  scheduleNotification(rawBag) {
+    const bag = BagFactory.create(rawBag);
+    if (!bag) {
+      throw new Error(`Bag is malformed bag: ${rawBag}`);
+    }
+
     const now = new Date();
     const dueDate = bag.dueDate ? new Date(bag.dueDate) : undefined;
     if (!dueDate || dueDate < now) {
