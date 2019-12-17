@@ -17,7 +17,7 @@ beforeAll(() => {
 });
 
 beforeEach(async (done) => {
-  demoBags.forEach(async (bag) => {
+  demoBags.map(async (bag) => {
     await Bags.addBag(bag);
   });
   done();
@@ -84,7 +84,7 @@ test('Update malformed bag', async (done) => {
     jest.spyOn(NotificationScheduler.getInstance(), 'scheduleNotification');
 
   // ACT
-  expect(Bags.updateBag(malFormedBag)).rejects.toThrow();
+  await expect(Bags.updateBag(malFormedBag)).rejects.toThrow();
 
   // CHECK
   expect(scheduleNotification).not.toHaveBeenCalled();
@@ -120,7 +120,7 @@ test('Add malformed bag', async (done) => {
   const malFormedBag = new Bag(undefined, 'illustration', undefined);
 
   // ACT
-  expect(Bags.addBag(malFormedBag)).rejects.toThrow();
+  await expect(Bags.addBag(malFormedBag)).rejects.toThrow();
 
   // CHECK
   const allBags = await Bags.getBags();
@@ -160,7 +160,7 @@ test('Pass invalid ObjectId to delete', async (done) => {
         'abortScheduledNotification');
 
   // ACT
-  expect(Bags.deleteBag('klsjdfkj')).rejects.toThrow();
+  await expect(Bags.deleteBag('klsjdfkj')).rejects.toThrow();
 
   // CHECK
   expect(abortScheduledNotification).not.toHaveBeenCalled();
@@ -207,7 +207,7 @@ test('Get bag', async (done) => {
 
 test('Pass invalid ObjectId to get', async (done) => {
   // ACT
-  expect(Bags.getBag('sdf')).rejects.toThrow();
+  await expect(Bags.getBag('sdf')).rejects.toThrow();
 
   done();
 });
