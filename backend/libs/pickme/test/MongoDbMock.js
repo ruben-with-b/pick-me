@@ -41,9 +41,11 @@ class MongoDbMock {
     const mongoDbClient = await this.getMongoDbClient();
     try {
       const db = mongoDbClient.db(process.env.DB_NAME);
-      Promise.all(COLLECTIONS.map((c) => db.collection(c).deleteMany({})));
+      await Promise.all(
+          COLLECTIONS.map((c) => db.collection(c).deleteMany({})),
+      );
     } finally {
-      mongoDbClient.close();
+      await mongoDbClient.close();
     }
   }
 

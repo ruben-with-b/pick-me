@@ -40,7 +40,9 @@ class DbClient {
    * @return {Promise<void>}
    */
   async abortTransaction() {
-    await this.session.abortTransaction();
+    if (this.session && this.session.inTransaction()) {
+      await this.session.abortTransaction();
+    }
   }
 
   /**
@@ -48,9 +50,7 @@ class DbClient {
    * @return {Promise<void>}
    */
   async close() {
-    if (this.session && this.session.inTransaction()) {
-      await this.session.abortTransaction();
-    }
+    await this.abortTransaction();
 
     if (this.mongoClient) {
       await this.mongoClient.close();

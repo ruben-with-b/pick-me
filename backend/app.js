@@ -45,7 +45,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/users', userRouter);
 
 // Init notifications.
-NotificationScheduler.init().then(() => {
+NotificationScheduler.getInstance().init().then(() => {
   console.log('Notification scheduler successfully initialized');
 }).catch((e) => {
   console.error(e);

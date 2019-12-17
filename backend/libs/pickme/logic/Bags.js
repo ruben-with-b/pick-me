@@ -34,7 +34,7 @@ class Bags {
     dbClient.startTransaction();
     try {
       await dbClient.updateBag(bag);
-      NotificationScheduler.scheduleNotification(bag);
+      NotificationScheduler.getInstance().scheduleNotification(bag);
       await dbClient.commitTransaction();
       return bag;
     } finally {
@@ -58,7 +58,7 @@ class Bags {
     dbClient.startTransaction();
     try {
       const newBag = await dbClient.addBag(bag);
-      NotificationScheduler.scheduleNotification(bag);
+      NotificationScheduler.getInstance().scheduleNotification(bag);
       await dbClient.commitTransaction();
       return newBag;
     } finally {
@@ -82,7 +82,7 @@ class Bags {
     try {
       const itemDeleted = await dbClient.deleteBag(bagId);
       if (itemDeleted) {
-        NotificationScheduler.abortScheduledNotification(bagId);
+        NotificationScheduler.getInstance().abortScheduledNotification(bagId);
       }
       await dbClient.commitTransaction();
       return itemDeleted;
