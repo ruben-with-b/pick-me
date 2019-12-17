@@ -63,7 +63,7 @@ test('Update bag', async (done) => {
   bag.addItem(additionalItem);
 
   const scheduleNotification =
-    jest.spyOn(NotificationScheduler.getInstance(), 'scheduleNotification');
+    jest.spyOn(NotificationScheduler.prototype, 'scheduleNotification');
 
   // ACT
   const returnValueUpdate = await Bags.updateBag(bag);
@@ -81,7 +81,7 @@ test('Update malformed bag', async (done) => {
   const malFormedBag = new Bag(undefined, 'illustration', undefined);
 
   const scheduleNotification =
-    jest.spyOn(NotificationScheduler.getInstance(), 'scheduleNotification');
+    jest.spyOn(NotificationScheduler.prototype, 'scheduleNotification');
 
   // ACT
   await expect(Bags.updateBag(malFormedBag)).rejects.toThrow();
@@ -97,7 +97,7 @@ test('Add bag', async (done) => {
   additionalBag.addItem(new Item('item-name', true));
 
   const scheduleNotification =
-    jest.spyOn(NotificationScheduler.getInstance(), 'scheduleNotification');
+    jest.spyOn(NotificationScheduler.prototype, 'scheduleNotification');
 
   // ACT
   const newBag = await Bags.addBag(additionalBag);
@@ -133,8 +133,7 @@ test('Delete bag', async (done) => {
   const toBeDeleted = (await Bags.getBags())[0];
 
   const abortScheduledNotification =
-    jest.spyOn(NotificationScheduler.getInstance(),
-        'abortScheduledNotification');
+    jest.spyOn(NotificationScheduler.prototype, 'abortScheduledNotification');
 
   // ACT
   const hasBeenDeleted = await Bags.deleteBag(toBeDeleted._id);
@@ -156,8 +155,7 @@ test('Delete bag', async (done) => {
 test('Pass invalid ObjectId to delete', async (done) => {
   // PRE
   const abortScheduledNotification =
-    jest.spyOn(NotificationScheduler.getInstance(),
-        'abortScheduledNotification');
+    jest.spyOn(NotificationScheduler.prototype, 'abortScheduledNotification');
 
   // ACT
   await expect(Bags.deleteBag('klsjdfkj')).rejects.toThrow();
@@ -177,8 +175,7 @@ test('Delete non-existent bag', async (done) => {
   jest.clearAllMocks();
 
   const abortScheduledNotification =
-    jest.spyOn(NotificationScheduler.getInstance(),
-        'abortScheduledNotification');
+    jest.spyOn(NotificationScheduler.prototype, 'abortScheduledNotification');
 
   // ACT
   const actualResult = await Bags.deleteBag(toBeDeleted._id);

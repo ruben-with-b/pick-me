@@ -40,10 +40,10 @@ class NotificationScheduler extends EventEmitter {
 
     let cronJob = this.bag2scheduler.get(bag._id);
 
-    if (cronJob && cronJob.cronTime === dueDate) {
-      // The notification to be scheduled is already scheduled!
-      return;
-    }
+    // Due to the fact that there is no convenient solution to get the CronTime
+    // we cannot check, if the dueDate has changed. As a workaround we stop
+    // the maybe existing CronJob. After that we reschedule the job. (Even if
+    // the CronTime has not changed!)
 
     // If there is already a notification scheduled, it must be aborted.
     if (cronJob) {
