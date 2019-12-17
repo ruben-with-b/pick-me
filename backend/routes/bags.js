@@ -115,7 +115,8 @@ router.get('/:id/share_on_whatsapp', async function(req, res) {
         message: invalidObjectIdMsg(bagId),
       });
     } else {
-      if (await Bags.getBag(bagId)) {
+      const bag = await Bags.getBag(bagId);
+      if (bag) {
         const msg = WhatsAppMsgBuilder.buildMsg(bag);
         res.send(msg);
       } else {
