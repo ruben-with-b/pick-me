@@ -52,11 +52,9 @@ class NotificationScheduler extends EventEmitter {
 
     // At last we must schedule a (new) notification.
     cronJob = new CronJob(dueDate, () => {
-      // TODO Trigger proper notification
       const msg = `Don't forget to pack the remaining items of bag: ` +
         `"${bag.name}"`;
-      console.log(msg);
-      this.emit('bagIsDue', msg);
+      this.emit(EVENT_BAG_DUE, msg);
     });
     cronJob.start();
     this.bag2scheduler.set(bag._id, cronJob);
@@ -97,7 +95,10 @@ const getInstance = function() {
   return NotificationScheduler.instance;
 };
 
+const EVENT_BAG_DUE = 'bagIsDue';
+
 NotificationScheduler.instance = new NotificationScheduler();
 
 module.exports = NotificationScheduler;
 module.exports.getInstance = getInstance;
+module.exports.EVENT_BAG_DUE = EVENT_BAG_DUE;
