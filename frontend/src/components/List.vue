@@ -9,13 +9,13 @@
         <input class="listname-input" :value="list.name">
         <ul class="packlist">
           <li
-            v-for="(item, index) in packlist"
+            v-for="(item, index) in listContent.content"
             :key="item.id"
             :title="item.title"
             @remove="this.packlist.splice(index, 1)"
           >
             <input type="checkbox">
-            {{ item.newItem }}
+            {{ item.name }}
             <button @click="removeTask(index)">X</button>
           </li>
         </ul>
@@ -39,7 +39,7 @@ import NavigationList from '@/components/NavigationList.vue';
 
 export default {
   name: 'App',
-  props: ['slide', 'newItem'],
+  props: ['slide', 'name'],
   components: {
     NavigationList,
   },
@@ -49,37 +49,34 @@ export default {
       newTodoText: '',
       newPackItem: '',
       packlist: [], // object
-      nextItemId: 1,
+      listContent: {
+        name: this.slide.name,
+        illustration: this.slide.illustration,
+        content: [],
+      },
     };
   },
   methods: {
     addNewListItem() {
-      this.packlist.push({
-        id: this.nextItemId++,
-        newItem: this.newPackItem,
+      this.listContent.content.push({
+        name: this.newPackItem,
+        state: true,
       });
       this.newTodoText = '';
     },
     removeTask(index) {
-      this.packlist.splice(index, 1);
+      this.listContent.content.splice(index, 1);
     },
     async saveList() {
       const url = 'http://localhost:3000/my_bags';
       const response = await fetch(url, {
         method: 'POST',
-        headers: new Headers(),
-        body: JSON.stringify(this.packlist),
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(this.listContent),
       });
-      const output = await response.json();
+      const output = await response;
+      console.log(this.packlist);
       console.log(output);
-
-      // fetch('https://jsonplaceholder.typicode.com/posts', {
-      //             method: 'POST',
-      //             headers : new Headers(),
-      //             body:JSON.stringify({tittle:tittle, body:body})
-      //         }).then((res) => res.json())
-      //         .then((data) =>  console.log(data))
-      //         .catch((err)=>console.log(err))
     },
   },
 };
