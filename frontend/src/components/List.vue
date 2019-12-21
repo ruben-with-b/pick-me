@@ -2,21 +2,24 @@
   <div class="root">
     <div class="header">
       <img :src="require('@/assets/1x' + list.illustration)"
-        alt="backpack" class="symbol-img">
+        alt="bag" class="symbol-img">
     </div>
     <div class="list-body">
       <div class="packlist-wrapper">
-        <input class="listname-input" :value="list.name">
+        <input class="listname-input"
+          v-model="listContent.name" :placeholder="list.name">
         <ul class="packlist">
           <li
             v-for="(item, index) in listContent.content"
             :key="item.id"
             :title="item.title"
-            @remove="this.packlist.splice(index, 1)"
           >
-            <input type="checkbox">
-            {{ item.name }}
-            <button @click="removeTask(index)">X</button>
+            <span v-if="item.name">
+              <input type="checkbox" id="checkbox"
+              v-model="item.state">
+                {{ item.name }}
+              <button @click="removeTask(index)">X</button>
+            </span>
           </li>
         </ul>
         <form class="flex newItem" v-on:submit.prevent="addNewListItem">
@@ -48,21 +51,31 @@ export default {
       list: this.slide,
       newTodoText: '',
       newPackItem: '',
-      packlist: [], // object
+      checked: null,
+      listName: '',
+      packlist: [],
       listContent: {
-        name: this.slide.name,
+        name: '',
         illustration: this.slide.illustration,
-        content: [],
+        content: [
+          {
+            name: null,
+            state: null,
+          },
+        ],
       },
     };
   },
   methods: {
     addNewListItem() {
-      this.listContent.content.push({
-        name: this.newPackItem,
-        state: true,
-      });
-      this.newTodoText = '';
+      // wenn des Ding net leer isch
+      if (this.newPackItem !== '') {
+        this.listContent.content.push({
+          name: this.newPackItem,
+          state: false, // checkbox schon bei form?
+        });
+        this.newPackItem = '';
+      }
     },
     removeTask(index) {
       this.listContent.content.splice(index, 1);
@@ -75,7 +88,6 @@ export default {
         body: JSON.stringify(this.listContent),
       });
       const output = await response;
-      console.log(this.packlist);
       console.log(output);
     },
   },
