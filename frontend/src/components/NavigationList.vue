@@ -18,7 +18,7 @@
       <li class="nav-item">
         <router-link to="" @click.native="sendList()">
           <icon-base width="50" height="50">
-              <icon-add />
+            <icon-save />
           </icon-base>
         </router-link>
       </li>
@@ -30,7 +30,7 @@
 import IconBase from '@/components/IconBase.vue';
 import IconMyBags from '@/assets/icons/IconMyBags.vue';
 import IconAccount from '@/assets/icons/IconAccount.vue';
-import IconAdd from '@/assets/icons/IconAdd.vue';
+import IconSave from '@/assets/icons/IconSave.vue';
 
 export default {
   name: 'App',
@@ -38,7 +38,7 @@ export default {
     IconBase,
     IconMyBags,
     IconAccount,
-    IconAdd,
+    IconSave,
   },
   created() {
   },

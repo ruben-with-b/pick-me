@@ -15,10 +15,19 @@
             :title="item.title"
           >
             <span v-if="item.name">
-              <input type="checkbox" id="checkbox"
-              v-model="item.state">
+              <p-check class="p-svg p-curve p-thick p-jelly" id="checkbox"
+                v-model="item.state">
+                <svg slot="extra" class="svg svg-icon" viewBox="0 0 20 20">
+                  <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                        style="stroke: white;fill:white"></path>
+                </svg>
+              </p-check>
                 {{ item.name }}
-              <button @click="removeTask(index)">X</button>
+              <button @click="removeTask(index)">
+                <icon-base width="35" height="35" viewBox="0 0 10 5">
+                  <icon-close />
+                </icon-base>
+              </button>
             </span>
           </li>
         </ul>
@@ -29,15 +38,29 @@
             id="new-item"
             placeholder="Add list item"
           >
-          <button>&#10003;</button>
+          <button>
+            <icon-base width="35" height="35" viewBox="0 0 10 5">
+              <icon-save />
+            </icon-base>
+          </button>
         </form>
       </div>
     </div>
+    <button class="cancel" @click="$router.go(-1)">
+      <icon-base width="35" height="35" viewBox="0 0 10 4">
+        <icon-back />
+      </icon-base>
+      <span>cancel</span>
+    </button>
     <NavigationList @send="saveList"/>
   </div>
 </template>
 
 <script>
+import IconBase from '@/components/IconBase.vue';
+import IconClose from '@/assets/icons/IconClose.vue';
+import IconBack from '@/assets/icons/IconBack.vue';
+import IconSave from '@/assets/icons/IconSave.vue';
 import NavigationList from '@/components/NavigationList.vue';
 
 export default {
@@ -45,6 +68,10 @@ export default {
   props: ['slide', 'name'],
   components: {
     NavigationList,
+    IconBase,
+    IconClose,
+    IconSave,
+    IconBack,
   },
   data() {
     return {
@@ -68,11 +95,10 @@ export default {
   },
   methods: {
     addNewListItem() {
-      // wenn des Ding net leer isch
       if (this.newPackItem !== '') {
         this.listContent.content.push({
           name: this.newPackItem,
-          state: false, // checkbox schon bei form?
+          state: false,
         });
         this.newPackItem = '';
       }
@@ -82,13 +108,15 @@ export default {
     },
     async saveList() {
       const url = 'http://localhost:3000/my_bags';
-      const response = await fetch(url, {
+      await fetch(url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(this.listContent),
       });
-      const output = await response;
-      console.log(output);
+
+      if (this.listContent.content.name !== undefined) {
+        this.$router.push({path: '/'});
+      }
     },
   },
 };
@@ -167,5 +195,16 @@ export default {
       }
     }
   }
+}
+
+.pretty {
+  margin-right: 0.05em;
+}
+
+.cancel{
+  position: fixed;
+  bottom: 1em;
+  left: 0.5em;
+  color: #ffffff;
 }
 </style>
