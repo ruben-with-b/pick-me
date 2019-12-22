@@ -2,7 +2,7 @@
   <div class="root">
     <h1>My Bags</h1>
     <div class="list-container">
-        <router-link :to="{ name: 'List', params: { packList }}"
+        <router-link :to="{ name: 'EditList', params: { packList }}"
         v-for="(packList, indx) in packLists" :key="packList.id" :index="indx"
           class="list-card">
           <img :src="require('@/assets/1x' + packLists[indx].illustration)"

@@ -7,10 +7,10 @@
     <div class="list-body">
       <div class="packlist-wrapper">
         <input class="listname-input"
-          v-model="listContent.name" :placeholder="list.name">
+          v-model="list.name">
         <ul class="packlist">
           <li
-            v-for="(item, index) in listContent.content"
+            v-for="(item, index) in list.content"
             :key="item.id"
             :title="item.title"
           >
@@ -65,7 +65,7 @@ import NavigationList from '@/components/NavigationList.vue';
 
 export default {
   name: 'App',
-  props: ['slide', 'name'],
+  props: ['packList', 'name'],
   components: {
     NavigationList,
     IconBase,
@@ -75,28 +75,18 @@ export default {
   },
   data() {
     return {
-      list: this.slide, // this.packList
+      list: this.packList,
       newTodoText: '',
       newPackItem: '',
       checked: null,
       listName: '',
       packlist: [],
-      listContent: {
-        name: '',
-        illustration: this.slide.illustration,
-        content: [
-          {
-            name: null,
-            state: null,
-          },
-        ],
-      },
     };
   },
   methods: {
     addNewListItem() {
       if (this.newPackItem !== '') {
-        this.listContent.content.push({
+        this.list.content.push({
           name: this.newPackItem,
           state: false,
         });
@@ -104,15 +94,15 @@ export default {
       }
     },
     removeTask(index) {
-      this.listContent.content.splice(index, 1);
+      this.list.content.splice(index, 1);
     },
     async saveList() {
       const url = 'http://localhost:3000/my_bags';
-      if (this.listContent.content.length > 1) {
+      if (this.list.content.length > 1) {
         await fetch(url, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(this.listContent),
+          body: JSON.stringify(this.list),
         });
         this.$router.push({path: '/'});
       }

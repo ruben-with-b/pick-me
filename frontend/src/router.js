@@ -5,6 +5,7 @@ import Router from 'vue-router';
 import Overview from '@/components/Overview';
 import Dashboard from '@/components/Dashboard';
 import List from '@/components/List';
+import EditList from '@/components/EditList';
 
 // Fallback page
 import PageNotFound from '@/components/PageNotFound';
@@ -27,6 +28,12 @@ export default new Router({
       path: '/list',
       name: 'List',
       component: List,
+      props: true,
+    },
+    {
+      path: '/custom-list',
+      name: 'EditList',
+      component: EditList,
       props: true,
     },
     {
