@@ -2,21 +2,55 @@
   <div class="root">
     <h1>My Bags</h1>
     <div class="list-container">
-        <div v-for="(list, indx) in lists" :key="indx" :index="indx"
+        <router-link :to="{ name: 'List', params: { packList }}"
+        v-for="(packList, indx) in packLists" :key="packList.id" :index="indx"
           class="list-card">
-          <img :src="require('@/assets/1x' + lists[indx].illustration)"
-            :alt="lists.name" class="card-img-small">
+          <img :src="require('@/assets/1x' + packLists[indx].illustration)"
+            :alt="packLists.name" class="card-img-small">
           <div class="right-info">
-            <h1>{{ lists[indx].name }}</h1>
-            <preview :prop="lists[indx]" />
+            <h1>{{ packLists[indx].name }}</h1>
+            <preview :prop="packLists[indx]" />
           </div>
-        </div>
+        </router-link>
     </div>
     <Navigation/>
   </div>
 </template>
 
+<script>
+import Preview from '@/components/PreviewList.vue';
+import Navigation from '@/components/Navigation.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Preview,
+    Navigation,
+  },
+  data() {
+    return {
+      packLists: undefined,
+    };
+  },
+  async mounted() {
+    const url = 'http://localhost:3000/my_bags';
+
+    const response = await fetch(url, {method: 'GET'});
+    this.packLists = await response.json();
+  },
+};
+</script>
+
 <style lang="scss" scoped>
+
+:focus{
+  outline: none
+}
+
+a{
+  text-decoration: none;
+}
+
 .list-container{
   height: 65vh;
   position: absolute;
@@ -61,27 +95,3 @@
   }
 }
 </style>
-
-<script>
-import Preview from '@/components/PreviewList.vue';
-import Navigation from '@/components/Navigation.vue';
-
-export default {
-  name: 'App',
-  components: {
-    Preview,
-    Navigation,
-  },
-  data() {
-    return {
-      lists: undefined,
-    };
-  },
-  async mounted() {
-    const url = 'http://localhost:3000/my_bags';
-
-    const response = await fetch(url, {method: 'GET'});
-    this.lists = await response.json();
-  },
-};
-</script>
