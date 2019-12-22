@@ -98,7 +98,7 @@ export default {
     },
     async saveList() {
       const url = 'http://localhost:3000/my_bags';
-      if (this.list.content.length > 1) {
+      if (this.list.content.length > 0) {
         await fetch(url, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},

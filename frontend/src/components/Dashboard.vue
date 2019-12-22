@@ -2,22 +2,35 @@
   <div class="root">
     <h1>My Bags</h1>
     <div class="list-container">
-        <router-link :to="{ name: 'EditList', params: { packList }}"
-        v-for="(packList, indx) in packLists" :key="packList.id" :index="indx"
-          class="list-card">
+      <div class="list-card" v-for="(packList, indx) in packLists"
+      :key="packList.id" :index="indx">
+        <router-link class="left-clickable"
+        :to="{ name: 'EditList', params: { packList }}">
           <img :src="require('@/assets/1x' + packLists[indx].illustration)"
             :alt="packLists.name" class="card-img-small">
-          <div class="right-info">
+          <div class="mid-info">
             <h1>{{ packLists[indx].name }}</h1>
             <preview :prop="packLists[indx]" />
           </div>
         </router-link>
+        <div class="right-info">
+          <icon-base width="25" height="25" viewBox="0 0 10 10">
+            <icon-share />
+          </icon-base>
+          <icon-base width="25" height="25" viewBox="0 0 10 10">
+            <icon-bucket />
+          </icon-base>
+        </div>
+      </div>
     </div>
     <Navigation/>
   </div>
 </template>
 
 <script>
+import IconBase from '@/components/IconBase.vue';
+import IconBucket from '@/assets/icons/IconBucket.vue';
+import IconShare from '@/assets/icons/IconShare.vue';
 import Preview from '@/components/PreviewList.vue';
 import Navigation from '@/components/Navigation.vue';
 
@@ -26,6 +39,9 @@ export default {
   components: {
     Preview,
     Navigation,
+    IconBucket,
+    IconBase,
+    IconShare,
   },
   data() {
     return {
@@ -63,33 +79,49 @@ a{
   .list-card{
     display: flex;
     align-items: center;
-    justify-content: center;
     background: #fff;
     border-radius: 1.5em;
     height: 8em;
     margin: 0 1em 1em 1em;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.05);
-    cursor: pointer;
 
     .card-img-small{
       width: 25%;
+      height: 25%;
       margin: 0 0 0 0;
+      align-self: center;
     }
 
-    .right-info{
+    .left-clickable{
+      display: flex;
+      cursor: pointer;
+      margin-left: 1em;
+    }
+
+    .mid-info{
       display: flex;
       flex-direction: column;
-      // justify-content: center;
-      // align-items: center;
-      // border:  2px solid navy;
       width: 100%;
-      height: 100%;
+      height: 7em;
       margin: 0 1em;
       overflow-y: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+
 
       h1{
         font-size: 1.2rem;
         margin: 1em 0 0.2em 0;
+      }
+    }
+
+    .right-info{
+      display: flex;
+      width: 50%;
+      justify-content: space-around;
+      margin-right: 1em;
+      svg{
+        cursor: pointer;
       }
     }
   }
