@@ -76,14 +76,14 @@ a{
 }
 
 .list-container{
-  height: 50vh;
+  height: 75vh;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   margin: auto;
-  padding: 0 0 12em 0;
+  padding: 0 0 0 0;
   overflow-y: scroll;
   // -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   // mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
@@ -117,9 +117,6 @@ a{
       height: 7em;
       margin: 0 1em;
       overflow-y: hidden;
-      // -webkit-mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
-      // mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
-
 
       h1{
         font-size: 1.2rem;

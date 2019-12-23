@@ -163,7 +163,6 @@ export default {
     }
 
     .packlist{
-      list-style: none;
       margin: 3em 0 0 0;
       padding: 0;
       font-size: 1.3rem;

@@ -24,10 +24,9 @@ ul{
   list-style: none;
   margin: 0;
   padding: 0;
+  -webkit-mask-image: linear-gradient(to bottom, black -100%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black -100%, transparent 100%);
 
-  li{
-    opacity: 0.2;
-  }
   svg{
     margin-left: -0.4rem;
   }

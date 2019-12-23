@@ -6,6 +6,7 @@ import Overview from '@/components/Overview';
 import Dashboard from '@/components/Dashboard';
 import List from '@/components/List';
 import EditList from '@/components/EditList';
+import Account from '@/components/Account';
 
 // Fallback page
 import PageNotFound from '@/components/PageNotFound';
@@ -35,6 +36,12 @@ export default new Router({
       name: 'EditList',
       component: EditList,
       props: true,
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account,
+      // props: true,
     },
     {
       path: '**',
