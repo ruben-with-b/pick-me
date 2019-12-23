@@ -25,6 +25,9 @@ ul{
   margin: 0;
   padding: 0;
 
+  li{
+    opacity: 0.2;
+  }
   svg{
     margin-left: -0.4rem;
   }

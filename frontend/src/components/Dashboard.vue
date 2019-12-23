@@ -17,7 +17,8 @@
           <icon-base width="25" height="25" viewBox="0 0 10 10">
             <icon-share />
           </icon-base>
-          <icon-base width="25" height="25" viewBox="0 0 10 10">
+          <icon-base width="25" height="25" viewBox="0 0 10 10"
+          @click.native="deleteList(packList._id)">
             <icon-bucket />
           </icon-base>
         </div>
@@ -54,6 +55,13 @@ export default {
     const response = await fetch(url, {method: 'GET'});
     this.packLists = await response.json();
   },
+  methods: {
+    async deleteList(id) {
+      const url = 'http://localhost:3000/my_bags/' + id;
+      await fetch(url, {method: 'DELETE'});
+      this.$router.go();
+    },
+  },
 };
 </script>
 
@@ -68,13 +76,17 @@ a{
 }
 
 .list-container{
-  height: 65vh;
+  height: 50vh;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   margin: auto;
+  padding: 0 0 12em 0;
+  overflow-y: scroll;
+  // -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  // mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 
   .list-card{
     display: flex;
@@ -105,8 +117,8 @@ a{
       height: 7em;
       margin: 0 1em;
       overflow-y: hidden;
-      -webkit-mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+      // -webkit-mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
+      // mask-image: linear-gradient(to bottom, black 35%, transparent 100%);
 
 
       h1{
