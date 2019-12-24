@@ -2,23 +2,23 @@
   <div class="root">
     <div class="header">
       <img src="require('@/assets/1x/')"
-        alt="profile-img" class="symbol-img">
+        alt="profile-img" class="profile-img">
     </div>
     <div class="account-body">
       <h1 class="user-headline">It's me, Ruben!</h1>
-      <ul>
+      <ul class="buttongroup">
         <li>
-          <button>
-            change profile picture
+          <button class="account-button">
+            upload new profile picture
           </button>
         </li>
         <li>
-          <button>
+          <button class="account-button">
             change username
           </button>
         </li>
         <li>
-          <button>
+          <button class="account-button">
             change password
           </button>
         </li>
@@ -58,9 +58,12 @@ export default {
   background: navy;
   color: #ffffff;
 
-  .symbol-img{
+  .profile-img{
     width: 3.5em;
     margin-top: -2em;
+    background: #ffffff;
+    border-radius: 3em;
+    color: navy;
   }
 }
 
@@ -79,9 +82,29 @@ export default {
     margin: 2em 0 0 0;
   }
 
-  ul{
-    margin: 0;
+  .buttongroup{
+    margin: 4em 0 0 0;
     padding: 0;
+
+    li{
+      border-bottom: 2px solid #eeeeee;
+    }
+
+    li:last-child{
+      border: none;
+    }
+
+    .account-button{
+      outline: none;
+      cursor: pointer;
+      color: navy;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0 0;
+      padding: 0.7em;
+      width: 100%;
+      text-align: left;
+    }
   }
 }
 

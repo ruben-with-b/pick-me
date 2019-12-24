@@ -7,6 +7,8 @@ import Dashboard from '@/components/Dashboard';
 import List from '@/components/List';
 import EditList from '@/components/EditList';
 import Account from '@/components/Account';
+import SignUp from '@/components/SignUp';
+import Login from '@/components/Login';
 
 // Fallback page
 import PageNotFound from '@/components/PageNotFound';
@@ -41,6 +43,18 @@ export default new Router({
       path: '/account',
       name: 'Account',
       component: Account,
+      // props: true,
+    },
+    {
+      path: '/sign-up',
+      name: 'SignUp',
+      component: SignUp,
+      // props: true,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
       // props: true,
     },
     {
