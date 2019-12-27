@@ -21,6 +21,7 @@ const NotificationScheduler =
 // Import routes
 const bagTemplatesRouter = require('./routes/bagTemplates');
 const bagsRouter = require('./routes/bags');
+const userRouter = require('./routes/users');
 // Import modules relevant for api-documentation.
 const yaml = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
@@ -41,6 +42,7 @@ app.use(function(req, res, next) {
 app.use('/bag_templates', bagTemplatesRouter);
 app.use('/my_bags', bagsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/users', userRouter);
 
 // Init notifications.
 NotificationScheduler.init().then(() => {

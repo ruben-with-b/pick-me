@@ -1,35 +1,43 @@
 <template>
   <div class="root">
     <div class="header">
-      <img src="require('@/assets/1x/')"
-        alt="logo" class="logo-img">
+      <div class="logo-img">
+        <icon-base width="30" height="30" viewBox="0 0 352 407">
+          <icon-logo />
+        </icon-base>
+      </div>
     </div>
     <div class="sign-body">
       <h1 class="sign-headline">Login</h1>
-      <div class="input-group">
-        <input type="text" id="userField" required class="input-area">
-        <label for="userField" class="labelUser">Username</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="passwordField" required class="input-area">
-        <label for="passwordField" class="labelPassword">Password</label>
-        <router-link class="signUp" to="/sign-up">
-          Sign up &nbsp;›
-        </router-link>
-      </div>
+      <form action="" method="POST">
+        <div class="input-group">
+          <input type="text" id="userField" required class="input-area">
+          <label for="userField" class="labelUser">Username</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="passwordField" required class="input-area">
+          <label for="passwordField" class="labelPassword">Password</label>
+          <router-link class="signUp" to="/sign-up">
+            Sign up &nbsp;›
+          </router-link>
+        </div>
+      </form>
     </div>
     <NavigationCheck/>
   </div>
 </template>
 
 <script>
-// import IconBase from '@/components/IconBase.vue';
+import IconBase from '@/components/IconBase.vue';
+import IconLogo from '@/assets/icons/IconLogo.vue';
 import NavigationCheck from '@/components/NavigationCheck.vue';
 
 export default {
   name: 'App',
   components: {
     NavigationCheck,
+    IconBase,
+    IconLogo,
   },
   data() {
     return {
@@ -53,7 +61,11 @@ export default {
   color: #ffffff;
 
   .logo-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 3.5em;
+    height: 3.5em;
     margin-top: -2em;
     background: #ffffff;
     border-radius: 3em;

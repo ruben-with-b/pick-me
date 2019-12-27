@@ -4,6 +4,7 @@ const {VueLoaderPlugin} = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = (env, argv) => ({
   mode: argv && argv.mode || 'development',
@@ -77,6 +78,14 @@ module.exports = (env, argv) => ({
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'frontend', 'static', 'index.html'),
       inject: true,
+    }),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'my-pwa-vue-app',
+      filename: 'service-worker-cache.js',
+      staticFileGlobs: ['dist/**/*.{js,css}', '/'],
+      minify: true,
+      stripPrefix: 'dist/',
+      dontCacheBustUrlsMatching: /\.\w{6}\./,
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, 'frontend', 'static'),

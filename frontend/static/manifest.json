@@ -1,0 +1,21 @@
+{
+    "short_name": "PickMe",
+    "name": "Pick Me – Your packing app",
+    "icons": [
+      {
+        "src": "/pickme-logo-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/pickme-logo-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#FFFFFF"
+  }

@@ -1,39 +1,48 @@
 <template>
   <div class="root">
     <div class="header">
-      <img src="require('@/assets/1x/')"
-        alt="logo" class="logo-img">
+      <div class="logo-img">
+        <icon-base width="30" height="30" viewBox="0 0 352 407">
+          <icon-logo />
+        </icon-base>
+      </div>
     </div>
     <div class="sign-body">
       <h1 class="sign-headline">Sign Up</h1>
-      <div class="input-group">
-        <input type="text" id="userField" required class="input-area">
-        <label for="userField" class="labelUser">Username</label>
-      </div>
-      <div class="input-group">
-        <input type="email" id="mailField" required class="input-area">
-        <label for="mailField" class="labelMail">E-Mail</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="passwordField" required class="input-area">
-        <label for="passwordField" class="labelPassword">Password</label>
-        <router-link class="login" to="/login">
-          Login &nbsp;›
-        </router-link>
-      </div>
+      <form action="" method="POST">
+        <div class="input-group">
+          <input type="text" id="userField" required class="input-area">
+          <label for="userField" class="labelUser">Username</label>
+        </div>
+        <div class="input-group">
+          <input type="email" id="mailField" required class="input-area">
+          <label for="mailField" class="labelMail">E-Mail</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="passwordField" required class="input-area">
+          <label for="passwordField" class="labelPassword">Password</label>
+          <router-link class="login" to="/login">
+            Login &nbsp;›
+          </router-link>
+        </div>
+        <input type="submit" value="Submit">
+      </form>
     </div>
-    <NavigationCheck/>
+    <NavigationCheck @send="submitForm"/>
   </div>
 </template>
 
 <script>
-// import IconBase from '@/components/IconBase.vue';
+import IconBase from '@/components/IconBase.vue';
+import IconLogo from '@/assets/icons/IconLogo.vue';
 import NavigationCheck from '@/components/NavigationCheck.vue';
 
 export default {
   name: 'App',
   components: {
     NavigationCheck,
+    IconLogo,
+    IconBase,
   },
   data() {
     return {
@@ -41,6 +50,9 @@ export default {
     };
   },
   methods: {
+    submitForm() {
+
+    },
 
   },
 };
@@ -57,7 +69,11 @@ export default {
   color: #ffffff;
 
   .logo-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 3.5em;
+    height: 3.5em;
     margin-top: -2em;
     background: #ffffff;
     border-radius: 3em;
