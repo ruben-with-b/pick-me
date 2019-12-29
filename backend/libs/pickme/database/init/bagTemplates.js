@@ -1,3 +1,5 @@
+'use strict';
+
 /** Some demo bag-templates. */
 const BagTemplates = require('../../model/BagTemplate');
 

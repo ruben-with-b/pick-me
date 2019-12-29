@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const Bags = require('../libs/pickme/logic/Bags');
 const BagFactory = require('../libs/pickme/logic/BagFactory');

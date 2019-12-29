@@ -1,3 +1,5 @@
+'use strict';
+
 const MongoClient = require('mongodb').MongoClient;
 const objectId = require('mongodb').ObjectId;
 const DbClient = require('./DbClient');

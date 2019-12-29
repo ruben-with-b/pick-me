@@ -1,3 +1,5 @@
+'use strict';
+
 /* TODO Once the authentication is implemented some functions must be adopted
         to fetch only information regarding the currently authenticated user. */
 

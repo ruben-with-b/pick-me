@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const Database = require('../libs/pickme/database/Database');
 // eslint-disable-next-line new-cap

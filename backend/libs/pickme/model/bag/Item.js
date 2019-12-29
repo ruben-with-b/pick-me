@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * An item to be packed into a bag.
  */

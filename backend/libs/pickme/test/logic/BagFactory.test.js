@@ -1,3 +1,5 @@
+'use strict';
+
 const BagFactory = require('../../logic/BagFactory');
 
 const BAG = {

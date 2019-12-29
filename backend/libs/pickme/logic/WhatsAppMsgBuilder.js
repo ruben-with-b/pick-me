@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Enables sharing bags at whatsapp.
  */

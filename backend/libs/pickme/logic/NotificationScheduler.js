@@ -1,3 +1,5 @@
+'use strict';
+
 const CronJob = require('cron').CronJob;
 const Database = require('../database/Database');
 const {EventEmitter} = require('events');

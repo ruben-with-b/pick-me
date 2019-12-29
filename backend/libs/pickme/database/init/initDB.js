@@ -1,3 +1,5 @@
+'use strict';
+
 /** Initializes the database with some demo bags and bag-templates. */
 require('dotenv').config();
 const Database = require('../Database');

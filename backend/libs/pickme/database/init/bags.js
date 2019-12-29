@@ -1,3 +1,5 @@
+'use strict';
+
 /** Some demo bags. */
 const Bag = require('../../model/bag/Bag');
 const Item = require('../../model/bag/Item');

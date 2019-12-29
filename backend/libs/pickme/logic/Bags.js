@@ -1,3 +1,5 @@
+'use strict';
+
 const Database = require('../database/Database');
 const NotificationScheduler = require('./NotificationScheduler');
 const BagFactory = require('./BagFactory');
