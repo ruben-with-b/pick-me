@@ -16,7 +16,7 @@ const invalidObjectIdMsg = (id) => {
 };
 
 /* GET bags listing. */
-router.get('/', async function(req, res) {
+router.get('/', async (req, res) => {
   try {
     const bags = await Bags.getBags();
     res.send(bags);
@@ -30,7 +30,7 @@ router.get('/', async function(req, res) {
 });
 
 /* Create a new bag. If the request contains an existing bag, it is updated. */
-router.post('/', async function(req, res) {
+router.post('/', async (req, res) => {
   try {
     const bag = BagFactory.create(req.body);
     if (!bag) {
@@ -76,7 +76,7 @@ router.post('/', async function(req, res) {
 });
 
 /* Deletes a bag. */
-router.delete('/:id', async function(req, res) {
+router.delete('/:id', async (req, res) => {
   const bagId = req.params.id;
 
   try {
@@ -107,7 +107,7 @@ router.delete('/:id', async function(req, res) {
 });
 
 /* Get uri which allows sharing a bag on whatsapp. */
-router.get('/:id/share_on_whatsapp', async function(req, res) {
+router.get('/:id/share_on_whatsapp', async (req, res) => {
   const bagId = req.params.id;
   try {
     if (!await Database.isObjectIdValid(bagId)) {

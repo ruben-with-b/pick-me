@@ -31,7 +31,7 @@ const swaggerDocument = yaml.load('./backend/swagger.yaml');
 
 // Enable deploying the frontend and backend with two different ports at the
 // same machine.
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', '*');
   res.setHeader('Access-Control-Allow-Headers',

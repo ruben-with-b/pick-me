@@ -93,9 +93,9 @@ class NotificationScheduler extends EventEmitter {
 /**
  * @return {NotificationScheduler} The NotificationScheduler instance.
  */
-const getInstance = function() {
+function getInstance() {
   return NotificationScheduler.instance;
-};
+}
 
 const EVENT_BAG_DUE = 'bagIsDue';
 
