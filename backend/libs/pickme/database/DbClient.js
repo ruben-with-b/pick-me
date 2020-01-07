@@ -19,6 +19,7 @@ class DbClient {
     this.bagTemplatesTable =
       this.db.collection(process.env.DB_TABLE_NAME_BAG_TEMPLATES);
     this.bagsTable = this.db.collection(process.env.DB_TABLE_NAME_BAGS);
+    this.usersTable = this.db.collection(process.env.DB_TABLE_NAME_USERS);
   }
 
   /**
@@ -85,6 +86,14 @@ class DbClient {
    */
   async getBags() {
     return await this.bagsTable.find().toArray();
+  }
+
+  /**
+   * Get all users.
+   * @return {Promise<Users[]>}
+   */
+  async getUsers() {
+    return await this.usersTable.find().toArray();
   }
 
   /**

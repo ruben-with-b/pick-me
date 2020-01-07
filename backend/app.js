@@ -6,6 +6,7 @@ require('dotenv').config();
 // Auto-generated-at-express-setup---------------------------------------------
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
@@ -15,6 +16,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 // ----------------------------------------------------------------------------
 
@@ -23,7 +25,7 @@ const NotificationScheduler =
 // Import routes
 const bagTemplatesRouter = require('./routes/bagTemplates');
 const bagsRouter = require('./routes/bags');
-const userRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
 // Import modules relevant for api-documentation.
 const yaml = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
@@ -44,7 +46,7 @@ app.use((req, res, next) => {
 app.use('/bag_templates', bagTemplatesRouter);
 app.use('/my_bags', bagsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/users', userRouter);
+app.use('/users', usersRouter);
 
 // Init notifications.
 const notificationScheduler = NotificationScheduler.getInstance();

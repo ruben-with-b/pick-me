@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // All-this-code-was-auto-generated-at-express-setup---------------------------
 
+'use strict';
+
 /**
  * Module dependencies.
  */

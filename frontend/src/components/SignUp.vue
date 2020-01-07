@@ -11,21 +11,21 @@
       <h1 class="sign-headline">Sign Up</h1>
       <form action="" method="POST">
         <div class="input-group">
-          <input type="text" id="userField" required class="input-area">
+          <input type="text" id="userField" v-model="userData.username" required class="input-area">
           <label for="userField" class="labelUser">Username</label>
         </div>
         <div class="input-group">
-          <input type="email" id="mailField" required class="input-area">
+          <input type="email" id="mailField" v-model="userData.mail" required class="input-area">
           <label for="mailField" class="labelMail">E-Mail</label>
         </div>
         <div class="input-group">
-          <input type="password" id="passwordField" required class="input-area">
+          <input type="password" id="passwordField" v-model="userData.password" required class="input-area">
           <label for="passwordField" class="labelPassword">Password</label>
           <router-link class="login" to="/login">
             Login &nbsp;›
           </router-link>
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" @click="submitForm">
       </form>
     </div>
     <NavigationCheck @send="submitForm"/>
@@ -46,6 +46,11 @@ export default {
   },
   data() {
     return {
+      userData: {
+        username: '',
+        mail: '',
+        password: ''
+      }
 
     };
   },

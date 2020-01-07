@@ -1,9 +1,8 @@
-'use strict';
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import PrettyCheckbox from 'pretty-checkbox-vue';
 
-const Vue = require('vue');
-const App = require('./App.vue');
-const router = require('./router');
-const PrettyCheckbox = require('pretty-checkbox-vue');
 
 Vue.use(PrettyCheckbox);
 
