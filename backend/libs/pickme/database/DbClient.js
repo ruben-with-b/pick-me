@@ -132,6 +132,17 @@ class DbClient {
   }
 
   /**
+   * Deletes a user.
+   * @param {string} userId The id of an existing user.
+   * @return {Promise<boolean>}
+   * True, if a user has been deleted, otherwise false.
+   */
+  async deleteUser(userId) {
+    const result = await this.usersTable.deleteOne({'_id': objectId(userId)});
+    return result.deletedCount > 0;
+  }
+
+  /**
    * Updates the bag.
    * @param {Bag} bag The new version of the bag.
    * @return {Promise<void>}

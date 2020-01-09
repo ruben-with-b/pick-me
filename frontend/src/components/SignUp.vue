@@ -61,7 +61,6 @@ export default {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(this.userData),
       });
-      console.log(this.userData);
     },
   },
 };

@@ -84,6 +84,22 @@ paths:
                     password:
                       type: string
                       description: The password.
+  /users/{id}:
+    delete:
+      summary: Deletes a user.
+      description: |
+        Deletes the user with the given id.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID of the user to be deleted
+      responses:
+        '200':
+          description: |
+            If the user has successfully been deleted.
   /bag_templates:
     get:
       summary: Returns a list of all bag templates.

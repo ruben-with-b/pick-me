@@ -74,5 +74,35 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Delete a user
+router.delete('/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    if (!await Database.isObjectIdValid(userId)) {
+      // Invalid ID
+      res.statusCode = 400;
+      res.send({
+        message: invalidObjectIdMsg(userId),
+      });
+    } else {
+      const hasBeenDeleted = await Users.deleteUser(userId);
+      if (hasBeenDeleted) {
+        res.send();
+      } else {
+        res.statusCode = 404;
+        res.send({
+          message: `User with ID '${userId}' does not exist.`,
+        });
+      }
+    }
+  } catch (error) {
+    res.statusCode = 500;
+    res.send({
+      message: INTERNAL_ERROR_MSG,
+    });
+    console.error(error);
+  }
+});
 
 module.exports = router;

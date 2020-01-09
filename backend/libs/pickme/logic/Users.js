@@ -64,6 +64,28 @@ class Users {
       await dbClient.close();
     }
   }
+
+  /**
+   * Deletes an existing user.
+   * @param {string} userId The id of an existing user.
+   * @return {Promise<boolean>}
+   * True, if a user has been deleted, otherwise false.
+   */
+  static async deleteUser(userId) {
+    if (!await Database.isObjectIdValid(userId)) {
+      throw new Error(`${userId} is invalid ObjectId`);
+    }
+
+    const dbClient = await Database.connect();
+    dbClient.startTransaction();
+    try {
+      const itemDeleted = await dbClient.deleteUser(userId);
+      await dbClient.commitTransaction();
+      return itemDeleted;
+    } finally {
+      await dbClient.close();
+    }
+  }
 }
 
 module.exports = Users;
