@@ -25,7 +25,6 @@
             Login &nbsp;›
           </router-link>
         </div>
-        <input type="submit" value="Submit" @click="submitForm">
       </form>
     </div>
     <NavigationCheck @send="submitForm"/>
@@ -55,10 +54,15 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-
+    async submitForm() {
+      const url = 'http://localhost:3000/users';
+      await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(this.userData),
+      });
+      console.log(this.userData);
     },
-
   },
 };
 </script>

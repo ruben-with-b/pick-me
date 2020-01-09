@@ -109,6 +109,18 @@ class DbClient {
   }
 
   /**
+   * Adds a new user.
+   * @param {User} user
+   * @return {Promise<User>} The created user (including the assigned).
+   */
+  async addUser(user) {
+    user._id = await this.usersTable.insertOne(user).then((result) => {
+      return result.insertedId;
+    });
+    return user;
+  }
+
+  /**
    * Deletes a bag.
    * @param {string} bagId The id of an existing bag.
    * @return {Promise<boolean>}

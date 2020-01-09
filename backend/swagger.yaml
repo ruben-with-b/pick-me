@@ -7,6 +7,83 @@ info:
   version: 1.0.0
 
 paths:
+  /users:
+      get:
+        summary: Returns a list of all registred users.
+        description: |
+          This resource returns a list of all registered users.
+        responses:
+          '200':
+            description: A JSON array of bag templates.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: Unique ID of the user.
+                      username:
+                        type: string
+                        description: The user name.
+                      mail:
+                        type: string
+                        description: The mail adress.
+                      password:
+                        type: string
+                        description: The password.
+      post:
+        summary: Create/update a user.
+        description: |
+          If the user is nonexistent, the user is created. If the user has a known
+          id, the existing user is updated.
+        requestBody:
+          description: The user.
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: |
+                      (optional) The unique ID of the user. (This property is only
+                      required, if you want to update an existing user.)
+                  username:
+                    type: string
+                    description: The user name.
+                  mail:
+                    type: string
+                    description: The mail adress.
+                  password:
+                    type: string
+                    description: The password.
+        responses:
+          '200':
+            description: |
+              The user was successfully created/updated. The response contains
+              the recently created/updated user. (If a new user was created, the
+              response contains the id which was assigned to the user.)
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: Unique ID of the user.
+                    username:
+                      type: string
+                      description: The user name.
+                    mail:
+                      type: string
+                      description: The mail adress.
+                    password:
+                      type: string
+                      description: The password.
   /bag_templates:
     get:
       summary: Returns a list of all bag templates.

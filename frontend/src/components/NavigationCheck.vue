@@ -16,7 +16,7 @@
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="" @click.native="finish()">
+        <router-link to="" @click.native="sendForm">
           <icon-base class="logout-svg" width="50" height="50">
             <icon-save />
           </icon-base>
@@ -48,7 +48,7 @@ export default {
     };
   },
   methods: {
-    sendList() {
+    sendForm() {
       this.$emit('send');
     },
   },

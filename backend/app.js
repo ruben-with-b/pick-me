@@ -5,6 +5,7 @@ require('dotenv').config();
 
 // Auto-generated-at-express-setup---------------------------------------------
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -13,6 +14,7 @@ const logger = require('morgan');
 const app = express();
 
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
