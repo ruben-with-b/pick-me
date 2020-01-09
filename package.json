@@ -12,6 +12,7 @@
     "init:database": "node backend/libs/pickme/database/init/initDb.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
     "concurrently": "^5.0.0",

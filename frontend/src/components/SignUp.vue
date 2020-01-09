@@ -32,6 +32,7 @@
 </template>
 
 <script>
+const bcrypt = require('bcryptjs');
 import IconBase from '@/components/IconBase.vue';
 import IconLogo from '@/assets/icons/IconLogo.vue';
 import NavigationCheck from '@/components/NavigationCheck.vue';
@@ -59,7 +60,11 @@ export default {
       await fetch(url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(this.userData),
+        body: JSON.stringify({
+          username: this.userData.username,
+          mail: this.userData.mail,
+          password: bcrypt.hashSync(this.userData.password , 8)
+        }),
       });
     },
   },
