@@ -66,6 +66,7 @@ export default {
           password: bcrypt.hashSync(this.userData.password , 8)
         }),
       });
+      // await this.$router.push({path: '/account'});
     },
   },
 };

@@ -6,6 +6,9 @@ const router = express.Router();
 const Database = require('../libs/pickme/database/Database');
 const Users = require('../libs/pickme/logic/Users');
 const UserCreator = require('../libs/pickme/logic/UserCreator');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const config = require('./config');
 
 /** Some predefined messages. */
 const INTERNAL_ERROR_MSG = 'An internal error occurred! We\'re doing our ' +
@@ -63,8 +66,37 @@ router.post('/', async (req, res) => {
     } else {
       // If the user has no id a new user must be created.
       const newUser = await Users.addUser(user);
-      res.send(newUser);
+      await Users.selectByMail(req.body.mail);
+      const token = jwt.sign(
+          {id: user._id}, config.secret, {expiresIn: 86400},
+      );
+      res.status(200).send({auth: true, token: token, user: newUser});
     }
+  } catch (error) {
+    res.statusCode = 500;
+    res.send({
+      message: INTERNAL_ERROR_MSG,
+    });
+    console.error(error);
+  }
+});
+
+// login
+
+router.post('/login', async (req, res) => {
+  try {
+    const loggedUser = await Users.selectByMail(req.body.mail);
+    if (!loggedUser) {
+      return res.status(404).send('No user found.');
+    }
+    const passwordIsValid =
+    bcrypt.compareSync(req.body.password, loggedUser.password);
+    if (!passwordIsValid) {
+      return res.status(401).send({auth: false, token: null});
+    }
+    const token = jwt.sign({id: loggedUser._id},
+        config.secret, {expiresIn: 86400});
+    res.status(200).send({auth: true, token: token, loggedUser: loggedUser});
   } catch (error) {
     res.statusCode = 500;
     res.send({

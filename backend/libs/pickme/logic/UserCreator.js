@@ -16,7 +16,7 @@ class UserCreator {
     user._id = rawUser._id;
 
     // Each user must have a name.
-    if (!user.username) {
+    if (!user.username || !user.mail || !user.password ) {
       return undefined;
     }
 

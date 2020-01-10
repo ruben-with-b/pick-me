@@ -81,6 +81,15 @@ class DbClient {
   }
 
   /**
+   * Get the user with the specified mail.
+   * @param {string} mail The mail adress of the user to be fetched.
+   * @return {Promise<User>} The user.
+   */
+  async getUser(mail) {
+    return await this.usersTable.findOne({'mail': mail});
+  }
+
+  /**
    * Get all bags of the currently authenticated user.
    * @return {Promise<Bag[]>}
    */

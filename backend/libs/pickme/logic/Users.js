@@ -20,6 +20,21 @@ class Users {
   }
 
   /**
+   * Selects a user by mail.
+   * @param {Mail} rawMail The Mail adress of an existing user.
+   * @return {Promise<User>}
+   * The user containing this mail adress.
+   */
+  static async selectByMail(rawMail) {
+    const dbClient = await Database.connect();
+    try {
+      return (await dbClient.getUser(rawMail));
+    } finally {
+      await dbClient.close();
+    }
+  }
+
+  /**
    * Adds a new user.
    * @param {User} rawUser An existing user (must not contain an id).
    * @return {Promise<User>}

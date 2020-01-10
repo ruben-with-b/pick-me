@@ -11,11 +11,11 @@
       <h1 class="sign-headline">Login</h1>
       <form action="" method="POST">
         <div class="input-group">
-          <input type="text" id="userField" required class="input-area">
-          <label for="userField" class="labelUser">Username</label>
+          <input type="email" id="mailField" v-model="userLoginData.mail" required class="input-area">
+          <label for="mailField" class="labelMail">E-Mail</label>
         </div>
         <div class="input-group">
-          <input type="password" id="passwordField" required class="input-area">
+          <input type="password" id="passwordField" v-model="userLoginData.password" required class="input-area">
           <label for="passwordField" class="labelPassword">Password</label>
           <router-link class="signUp" to="/sign-up">
             Sign up &nbsp;›
@@ -23,28 +23,43 @@
         </div>
       </form>
     </div>
-    <NavigationCheck/>
+    <NavigationLogin @send="submitLoginForm"/>
   </div>
 </template>
 
 <script>
 import IconBase from '@/components/IconBase.vue';
 import IconLogo from '@/assets/icons/IconLogo.vue';
-import NavigationCheck from '@/components/NavigationCheck.vue';
+import NavigationLogin from '@/components/NavigationLogin.vue';
 
 export default {
   name: 'App',
   components: {
-    NavigationCheck,
+    NavigationLogin,
     IconBase,
     IconLogo,
   },
   data() {
     return {
-
+      userLoginData: {
+        mail: '',
+        password: ''
+      }
     };
   },
   methods: {
+    async submitLoginForm() {
+      const url = 'http://localhost:3000/users/login';
+      await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          mail: this.userLoginData.mail,
+          password: this.userLoginData.password
+        }),
+      });
+      // await this.$router.push({path: '/'});
+    },
 
   },
 };
@@ -103,19 +118,19 @@ export default {
       &:focus{
         border-bottom: 2px solid royalblue;
       }
-      &:focus + .labelUser,
+      &:focus + .labelMail,
       &:focus + .labelPassword{
         top: -4em;
         font-size: 0.9rem;
       }
-      &:valid + .labelUser,
+      &:valid + .labelMail,
       &:valid + .labelPassword{
         top: -4em;
         font-size: 0.9rem;
       }
     }
 
-    .labelUser,
+    .labelMail,
     .labelPassword{
       position: relative;
       top: -2em;
