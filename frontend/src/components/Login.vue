@@ -47,6 +47,9 @@ export default {
       }
     };
   },
+  mounted () {
+    console.log(localStorage);
+  },
   methods: {
     async submitLoginForm() {
       if (this.userLoginData.password.length > 0) {
@@ -65,16 +68,10 @@ export default {
 
         if (localStorage.getItem('jwt') != null){
           this.$emit('loggedIn')
-          if(this.$route.params.nextUrl != null){
-              this.$router.push(this.$route.params.nextUrl)
-          }
-          else {
-            this.$router.push('')
-          }
+          this.$router.push('account')
         }
       }
     },
-
   },
 };
 </script>

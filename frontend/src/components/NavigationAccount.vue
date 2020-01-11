@@ -49,8 +49,8 @@ export default {
     };
   },
   methods: {
-    sendList() {
-      this.$emit('send');
+    logout() {
+      this.$emit('logout');
     },
   },
   mounted() {

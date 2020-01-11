@@ -66,6 +66,19 @@ export default {
           password: bcrypt.hashSync(this.userData.password , 8)
         }),
       });
+      const data = await res.json();
+        localStorage.setItem('user',JSON.stringify(data.loggedUser))
+        localStorage.setItem('jwt',data.token)
+
+        if (localStorage.getItem('jwt') != null){
+          this.$emit('loggedIn')
+          if(this.$route.params.nextUrl != null){
+              this.$router.push(this.$route.params.nextUrl)
+          }
+          else {
+            this.$router.push('')
+          }
+        }
       // await this.$router.push({path: '/account'});
     },
   },

@@ -5,7 +5,7 @@
         alt="profile-img" class="profile-img">
     </div>
     <div class="account-body">
-      <h1 class="user-headline">It's me, Ruben!</h1>
+      <h1 class="user-headline">It's me, {{ currentUser.username }}</h1>
       <ul class="buttongroup">
         <li>
           <button class="account-button">
@@ -24,7 +24,7 @@
         </li>
       </ul>
     </div>
-    <NavigationAccount/>
+    <NavigationAccount @logout="userLogout"/>
   </div>
 </template>
 
@@ -39,11 +39,19 @@ export default {
   },
   data() {
     return {
-
+      currentUser: undefined
     };
   },
+  mounted () {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
+  },
   methods: {
-
+    userLogout(){
+      localStorage.removeItem('user');
+      localStorage.removeItem('jwt');
+      this.$emit('loggedOut');
+      this.$router.push('login');
+    }
   },
 };
 </script>

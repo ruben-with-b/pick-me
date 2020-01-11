@@ -22,7 +22,7 @@ let router = new Router({
       name: 'Dashboard',
       component: Dashboard,
       meta: { 
-        requiresAuth: true
+        guest: true
       }
     },
     {
@@ -46,7 +46,9 @@ let router = new Router({
       path: '/account',
       name: 'Account',
       component: Account,
-      // props: true,
+      meta: { 
+        requiresAuth: true
+      }
     },
     {
       path: '/sign-up',
@@ -60,6 +62,7 @@ let router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+      props: true,
       meta: { 
         guest: true
       }
@@ -73,23 +76,17 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  // if want to route to an auth required page
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('jwt') == null) {
+    if (localStorage.getItem('jwt') == null && to.path !== '/login') { // if user not logged in
       next({
-        path: '/login',
-        params: { nextUrl: to.fullPath }
-      })
+        path: '/login'
+      }) 
     } else {
       	next()
     }
-  } else if(to.matched.some(record => record.meta.guest)) {
-	    if(localStorage.getItem('jwt') == null){
-	        next()
-	    }
-	    else{
-	        next({ name: 'Dashboard'})
-	    }
-    }else {
+
+  } else {
     next() 
   }
 })
