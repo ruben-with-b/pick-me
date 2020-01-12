@@ -15,7 +15,7 @@ const invalidObjectIdMsg = (id) => {
   return `ID '${id}' is invalid ObjectId.`;
 };
 
-/* GET bags listing. */
+/* GET bags listing from every user. */
 router.get('/', async (req, res) => {
   try {
     const bags = await Bags.getBags();
@@ -28,6 +28,22 @@ router.get('/', async (req, res) => {
     console.error(error);
   }
 });
+
+/* GET bags from authenticated user. */
+router.get('/:id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const bags = await Bags.getBagsByUser(userId);
+    res.send(bags);
+  } catch (error) {
+    res.statusCode = 500;
+    res.send({
+      message: INTERNAL_ERROR_MSG,
+    });
+    console.error(error);
+  }
+});
+
 
 /* Create a new bag. If the request contains an existing bag, it is updated. */
 router.post('/', async (req, res) => {

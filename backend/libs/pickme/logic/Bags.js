@@ -127,7 +127,7 @@ class Bags {
     const dbClient = await Database.connect();
 
     try {
-      return (await dbClient.getBagsByUser(userId).map((bag) => BagFactory.create(bag)));
+      return (await dbClient.getBagsByUser(userId));
     } finally {
       await dbClient.close();
     }
