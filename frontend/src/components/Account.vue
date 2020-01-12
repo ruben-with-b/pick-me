@@ -22,6 +22,11 @@
             change password
           </button>
         </li>
+        <li>
+          <button class="account-button">
+            delete my account
+          </button>
+        </li>
       </ul>
     </div>
     <NavigationAccount @logout="userLogout"/>

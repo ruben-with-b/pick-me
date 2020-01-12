@@ -108,6 +108,7 @@ export default {
       this.listContent.content.splice(index, 1);
     },
     async saveList() {
+      this.listContent.byUser = await JSON.parse(localStorage.getItem('user'))._id;
       const url = 'http://localhost:3000/my_bags';
       if (this.listContent.content.length > 1) {
         await fetch(url, {
