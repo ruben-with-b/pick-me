@@ -116,6 +116,22 @@ class Bags {
       await dbClient.close();
     }
   }
+
+  /**
+   * Get bags by user id.
+   * @param {string} userId The id of the user.
+   * @return {Promise<Bag[]>}
+   * Bags or undefined, if there is no user with the specified id.
+   */
+  static async getBagsByUser(userId) {
+    const dbClient = await Database.connect();
+
+    try {
+      return (await dbClient.getBagsByUser(userId).map((bag) => BagFactory.create(bag)));
+    } finally {
+      await dbClient.close();
+    }
+  }
 }
 
 module.exports = Bags;

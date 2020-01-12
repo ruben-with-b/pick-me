@@ -98,6 +98,15 @@ class DbClient {
   }
 
   /**
+   * Get all bags of the currently authenticated user.
+   * @param {string} userId The id of the user.
+   * @return {Promise<Bag[]>}
+   */
+  async getBagsByUser(userId) {
+    return await this.bagsTable.find({'byUser': userId}).toArray();
+  }
+
+  /**
    * Get all users.
    * @return {Promise<Users[]>}
    */
