@@ -84,6 +84,7 @@ export default {
       listContent: {
         name: '',
         illustration: this.slide.illustration,
+        byUser: '',
         content: [
           {
             name: null,

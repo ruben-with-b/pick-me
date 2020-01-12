@@ -11,11 +11,13 @@ class Bag {
    * the bag.
    * @param {string} dueDate
    * (optional) Time at which the bag must be ready packed. (ISO 8601 format)
+   * @param {string} byUser
    */
-  constructor(name, illustration, dueDate) {
+  constructor(name, illustration, dueDate, byUser) {
     this.name = name;
     this.illustration = illustration;
     this.dueDate = dueDate;
+    this.byUser = byUser;
     this.content = [];
     this._id = undefined;
   }

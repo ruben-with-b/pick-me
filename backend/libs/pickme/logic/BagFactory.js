@@ -12,7 +12,7 @@ class BagFactory {
    * @return {Bag|undefined} Bag or 'undefined'.
    */
   static create(rawBag) {
-    const bag = new Bag(rawBag.name, rawBag.illustration, rawBag.dueDate);
+    const bag = new Bag(rawBag.name, rawBag.illustration, rawBag.dueDate, rawBag.byUser);
 
     if (rawBag.content && !Array.isArray(rawBag.content)) {
       return undefined;

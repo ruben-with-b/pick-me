@@ -94,7 +94,7 @@ class Bags {
   }
 
   /**
-   * Get bag by id.
+   * Get bag by bag id.
    * @param {string} bagId The id of the bag.
    * @return {Promise<Bag>}
    * Bag or undefined, if there is no bag with the specified id.

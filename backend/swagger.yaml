@@ -126,6 +126,9 @@ paths:
                     illustration:
                       type: string
                       description: The location of an illustration characterizing the bag.
+                    byUser:
+                      type: string
+                      description: The id of the user that created the bag.
   /my_bags:
     get:
       summary: Returns a list of all your bags.
@@ -157,6 +160,9 @@ paths:
                       type: string
                       format: date-time
                       description: (optional) Time at which the bag must be ready packed. (ISO 8601 format)
+                    byUser:
+                      type: string
+                      description: The id of the user that created the bag.
                     content:
                       type: array
                       items:
@@ -196,6 +202,9 @@ paths:
                   type: string
                   format: date-time
                   description: (optional) Time at which the bag must be ready packed. (ISO 8601 format)
+                byUser:
+                  type: string
+                  description: (optional) The id of the user that created the bag.
                 content:
                   type: array
                   items:
@@ -231,6 +240,9 @@ paths:
                     type: string
                     format: date-time
                     description: (optional) Time at which the bag must be ready packed. (ISO 8601 format)
+                  byUser:
+                    type: string
+                    description: (optional) The id of the user that created the bag.
                   content:
                     type: array
                     items:
