@@ -47,9 +47,6 @@ export default {
       }
     };
   },
-  mounted () {
-
-  },
   methods: {
     async submitLoginForm() {
       if (this.userLoginData.password.length > 0) {
@@ -64,12 +61,12 @@ export default {
             }),
           });
           const data = await res.json();
-          localStorage.setItem('user',JSON.stringify(data.loggedUser))
-          localStorage.setItem('jwt',data.token)
+          localStorage.setItem('user',JSON.stringify(data.loggedUser));
+          localStorage.setItem('jwt',data.token);
 
           if (localStorage.getItem('jwt') != null){
-            this.$emit('loggedIn')
-            this.$router.push('account')
+            this.$emit('loggedIn');
+            this.$router.push('account');
           }
         } catch (error) {
           console.error(error);

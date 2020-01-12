@@ -40,20 +40,10 @@ export default {
     IconAccount,
     IconSave,
   },
-  created() {
-  },
-  data() {
-    return {
-
-    };
-  },
   methods: {
     sendList() {
       this.$emit('send');
     },
-  },
-  mounted() {
-
   },
 };
 </script>

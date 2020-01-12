@@ -41,20 +41,10 @@ export default {
     IconAccount,
     IconLogout,
   },
-  created() {
-  },
-  data() {
-    return {
-
-    };
-  },
   methods: {
     logout() {
       this.$emit('logout');
     },
-  },
-  mounted() {
-
   },
 };
 </script>

@@ -26,6 +26,23 @@
   </div>
 </template>
 
+<script>
+import IconBase from '@/components/IconBase.vue';
+import IconMyBags from '@/assets/icons/IconMyBags.vue';
+import IconAccount from '@/assets/icons/IconAccount.vue';
+import IconAdd from '@/assets/icons/IconAdd.vue';
+
+export default {
+  name: 'App',
+  components: {
+    IconBase,
+    IconMyBags,
+    IconAccount,
+    IconAdd,
+  }
+};
+</script>
+
 <style lang="scss" scoped>
   ul.bottom-navigation {
     list-style: none;
@@ -102,28 +119,3 @@
     }
   }
 </style>
-
-<script>
-import IconBase from '@/components/IconBase.vue';
-import IconMyBags from '@/assets/icons/IconMyBags.vue';
-import IconAccount from '@/assets/icons/IconAccount.vue';
-import IconAdd from '@/assets/icons/IconAdd.vue';
-
-export default {
-  name: 'App',
-  components: {
-    IconBase,
-    IconMyBags,
-    IconAccount,
-    IconAdd,
-  },
-  data() {
-    return {
-
-    };
-  },
-  mounted() {
-
-  },
-};
-</script>

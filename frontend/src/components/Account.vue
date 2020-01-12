@@ -34,7 +34,6 @@
 </template>
 
 <script>
-// import IconBase from '@/components/IconBase.vue';
 import NavigationAccount from '@/components/NavigationAccount.vue';
 
 export default {

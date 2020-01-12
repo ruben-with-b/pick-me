@@ -40,13 +40,6 @@ export default {
     IconAccount,
     IconSave,
   },
-  created() {
-  },
-  data() {
-    return {
-
-    };
-  },
   methods: {
     sendForm() {
       this.$emit('send');
