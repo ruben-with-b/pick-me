@@ -56,7 +56,5 @@ export default {
       item: this.item,
     };
   },
-  mounted() {
-  },
 };
 </script>

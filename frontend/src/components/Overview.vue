@@ -53,12 +53,14 @@ export default {
     };
   },
   async mounted() {
-    // fetch API data here
     const url = 'http://localhost:3000/bag_templates';
-
-    const response = await fetch(url, {method: 'GET'});
-    const data = await response.json();
-    this.slides = data;
+    try{
+      const response = await fetch(url, {method: 'GET'});
+      const data = await response.json();
+      this.slides = data;
+    } catch (error) {
+        console.error(error);
+    }
   },
 };
 </script>

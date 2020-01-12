@@ -54,21 +54,25 @@ export default {
     async submitLoginForm() {
       if (this.userLoginData.password.length > 0) {
         const url = 'http://localhost:3000/users/login';
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            mail: this.userLoginData.mail,
-            password: this.userLoginData.password
-          }),
-        });
-        const data = await res.json();
-        localStorage.setItem('user',JSON.stringify(data.loggedUser))
-        localStorage.setItem('jwt',data.token)
+        try{
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              mail: this.userLoginData.mail,
+              password: this.userLoginData.password
+            }),
+          });
+          const data = await res.json();
+          localStorage.setItem('user',JSON.stringify(data.loggedUser))
+          localStorage.setItem('jwt',data.token)
 
-        if (localStorage.getItem('jwt') != null){
-          this.$emit('loggedIn')
-          this.$router.push('account')
+          if (localStorage.getItem('jwt') != null){
+            this.$emit('loggedIn')
+            this.$router.push('account')
+          }
+        } catch (error) {
+          console.error(error);
         }
       }
     },

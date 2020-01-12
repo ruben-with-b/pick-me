@@ -52,10 +52,14 @@ export default {
   },
   async mounted() {
     if (await JSON.parse(localStorage.getItem('user')) != null ) {
-      this.userId = await JSON.parse(localStorage.getItem('user'))._id;
-      const url = 'http://localhost:3000/my_bags/' + this.userId;
-      const response = await fetch(url, {method: 'GET'});
-      this.packLists = await response.json();
+      try{
+        this.userId = await JSON.parse(localStorage.getItem('user'))._id;
+        const url = 'http://localhost:3000/my_bags/' + this.userId;
+        const response = await fetch(url, {method: 'GET'});
+        this.packLists = await response.json();
+      } catch (error) {
+          console.error(error);
+      }
     }
   },
   methods: {

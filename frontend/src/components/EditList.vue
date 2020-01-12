@@ -99,12 +99,16 @@ export default {
     async saveList() {
       const url = 'http://localhost:3000/my_bags';
       if (this.list.content.length > 0) {
-        await fetch(url, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(this.list),
-        });
-        this.$router.push({path: '/'});
+        try{
+          await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.list),
+          });
+          this.$router.push({path: '/'});
+          } catch (error) {
+            console.error(error);
+        }
       }
     },
   },

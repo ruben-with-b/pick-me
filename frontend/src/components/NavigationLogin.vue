@@ -52,9 +52,6 @@ export default {
       this.$emit('send');
     },
   },
-  mounted() {
-
-  },
 };
 </script>
 

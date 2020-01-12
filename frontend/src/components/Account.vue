@@ -1,8 +1,8 @@
 <template>
   <div class="root">
     <div class="header">
-      <img src="require('@/assets/1x/')"
-        alt="profile-img" class="profile-img">
+      <!-- <img src="require('@/assets/1x/')"
+        alt="profile-img" class="profile-img"> -->
     </div>
     <div class="account-body">
       <h1 class="user-headline">It's me, {{ currentUser.username }}</h1>

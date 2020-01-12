@@ -111,12 +111,16 @@ export default {
       this.listContent.byUser = await JSON.parse(localStorage.getItem('user'))._id;
       const url = 'http://localhost:3000/my_bags';
       if (this.listContent.content.length > 1) {
-        await fetch(url, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(this.listContent),
-        });
-        this.$router.push({path: '/'});
+        try{
+          await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.listContent),
+          });
+          this.$router.push({path: '/'});
+          } catch (error) {
+            console.error(error);
+        }  
       }
     },
   },

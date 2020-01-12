@@ -57,22 +57,26 @@ export default {
   methods: {
     async submitForm() {
       const url = 'http://localhost:3000/users';
-      const post = await fetch(url, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          username: this.userData.username,
-          mail: this.userData.mail,
-          password: bcrypt.hashSync(this.userData.password , 8)
-        }),
-      });
-      const data = await post.json();
-      localStorage.setItem('user',JSON.stringify(data.user));
-      localStorage.setItem('jwt',data.token);
+      try{
+        const post = await fetch(url, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            username: this.userData.username,
+            mail: this.userData.mail,
+            password: bcrypt.hashSync(this.userData.password , 8)
+          }),
+        });
+        const data = await post.json();
+        localStorage.setItem('user',JSON.stringify(data.user));
+        localStorage.setItem('jwt',data.token);
 
-      if (localStorage.getItem('jwt') != null){
-        this.$emit('loggedIn');
-        this.$router.push('account');
+        if (localStorage.getItem('jwt') != null){
+          this.$emit('loggedIn');
+          this.$router.push('account');
+        }
+      } catch (error) {
+          console.error(error);
       }
     }
   },
