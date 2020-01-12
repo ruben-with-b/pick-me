@@ -131,7 +131,7 @@ paths:
                       description: The id of the user that created the bag.
   /my_bags:
     get:
-      summary: Returns a list of all your bags.
+      summary: Returns a list of all bags of all users.
       description: |
         This resource returns a list of all your bags. Each of your bags is
         characterized with the preconfigured illustration and the name you've
