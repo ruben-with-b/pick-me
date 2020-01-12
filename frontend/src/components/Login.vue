@@ -62,14 +62,16 @@ export default {
               password: this.userLoginData.password
             }),
           });
-          const data = await res.json();
-          // entries to local storage to keep up login
-          localStorage.setItem('user',JSON.stringify(data.loggedUser));
-          localStorage.setItem('jwt',data.token);
-          // on successful login, go to Account
-          if (localStorage.getItem('jwt') != null){
-            this.$emit('loggedIn');
-            this.$router.push('account');
+          if(res.ok){
+            const data = await res.json();
+            // entries to local storage to keep up login
+            localStorage.setItem('user',JSON.stringify(data.loggedUser));
+            localStorage.setItem('jwt',data.token);
+            // on successful login, go to Account
+            if (localStorage.getItem('jwt') != null){
+              this.$emit('loggedIn');
+              this.$router.push('account');
+            }
           }
         } catch (error) {
           console.error(error);

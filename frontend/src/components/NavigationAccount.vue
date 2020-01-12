@@ -92,7 +92,7 @@ export default {
       margin-left: 1em;
     }
     li:last-child {
-      background: navy;
+      background: red;
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
       border-radius: 20em;
       width: 5em;
