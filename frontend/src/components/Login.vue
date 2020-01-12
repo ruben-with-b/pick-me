@@ -48,7 +48,7 @@ export default {
     };
   },
   mounted () {
-    console.log(localStorage);
+
   },
   methods: {
     async submitLoginForm() {

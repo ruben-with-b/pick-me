@@ -29,18 +29,27 @@ let router = new Router({
       path: '/overview',
       name: 'Overview',
       component: Overview,
+      meta: { 
+        guest: true
+      }
     },
     {
       path: '/list',
       name: 'List',
       component: List,
       props: true,
+      meta: { 
+        requiresAuth: true
+      }
     },
     {
       path: '/custom-list',
       name: 'EditList',
       component: EditList,
       props: true,
+      meta: { 
+        requiresAuth: true
+      }
     },
     {
       path: '/account',
