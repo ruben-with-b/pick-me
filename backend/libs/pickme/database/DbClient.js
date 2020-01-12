@@ -103,9 +103,7 @@ class DbClient {
    * @return {Promise<Bag[]>}
    */
   async getBagsByUser(userId) {
-    const result = await this.bagsTable.find({'byUser': userId}).toArray();
-    console.log(result);
-    return result;
+    return await this.bagsTable.find({'byUser': userId}).toArray();
   }
 
   /**

@@ -47,15 +47,16 @@ export default {
   data() {
     return {
       packLists: undefined,
-      userId: undefined
+      userId: ''
     };
   },
   async mounted() {
-    this.userId = await JSON.parse(localStorage.getItem('user'))._id;
-    const url = 'http://localhost:3000/my_bags/' + this.userId;
-
-    const response = await fetch(url, {method: 'GET'});
-    this.packLists = await response.json();
+    if (await JSON.parse(localStorage.getItem('user')) != null ) {
+      this.userId = await JSON.parse(localStorage.getItem('user'))._id;
+      const url = 'http://localhost:3000/my_bags/' + this.userId;
+      const response = await fetch(url, {method: 'GET'});
+      this.packLists = await response.json();
+    }
   },
   methods: {
     async deleteList(id) {
