@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// login
+// Login
 
 router.post('/login', async (req, res) => {
   try {

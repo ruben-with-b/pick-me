@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-/* GET bags from authenticated user. */
+/* GET bags from single authenticated user. */
 router.get('/:id', async (req, res) => {
   const userId = req.params.id;
   try {

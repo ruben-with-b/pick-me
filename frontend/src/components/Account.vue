@@ -47,11 +47,13 @@ export default {
     };
   },
   mounted () {
+    // get user from local storage
     this.currentUser = JSON.parse(localStorage.getItem('user'));
   },
   methods: {
     userLogout(){
       localStorage.removeItem('user');
+      // remove token to go to logout status
       localStorage.removeItem('jwt');
       this.$emit('loggedOut');
       this.$router.push('login');

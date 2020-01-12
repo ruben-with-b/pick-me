@@ -58,7 +58,8 @@ export default {
     async submitForm() {
       const url = 'http://localhost:3000/users';
       try{
-        const post = await fetch(url, {
+        // post from data to server
+        const res = await fetch(url, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -67,10 +68,11 @@ export default {
             password: bcrypt.hashSync(this.userData.password , 8)
           }),
         });
-        const data = await post.json();
+        const data = await res.json();
+        // entries to local storage to keep up login
         localStorage.setItem('user',JSON.stringify(data.user));
         localStorage.setItem('jwt',data.token);
-
+        // on successful login, go to Account
         if (localStorage.getItem('jwt') != null){
           this.$emit('loggedIn');
           this.$router.push('account');

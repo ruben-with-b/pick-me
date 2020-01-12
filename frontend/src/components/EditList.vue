@@ -90,7 +90,7 @@ export default {
           name: this.newPackItem,
           state: false,
         });
-        this.newPackItem = '';
+        this.newPackItem = ''; // clear input
       }
     },
     removeTask(index) {
@@ -100,6 +100,7 @@ export default {
       const url = 'http://localhost:3000/my_bags';
       if (this.list.content.length > 0) {
         try{
+          // post json to server
           await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

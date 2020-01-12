@@ -51,9 +51,11 @@ export default {
     };
   },
   async mounted() {
+    // if user logged in
     if (await JSON.parse(localStorage.getItem('user')) != null ) {
       try{
-        this.userId = await JSON.parse(localStorage.getItem('user'))._id;
+        // get bags of user
+        this.userId = await JSON.parse(localStorage.getItem('user'))._id; 
         const url = 'http://localhost:3000/my_bags/' + this.userId;
         const response = await fetch(url, {method: 'GET'});
         this.packLists = await response.json();

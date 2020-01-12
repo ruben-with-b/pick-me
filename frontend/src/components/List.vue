@@ -101,17 +101,20 @@ export default {
           name: this.newPackItem,
           state: false,
         });
-        this.newPackItem = '';
+        this.newPackItem = ''; // clear input
       }
     },
     removeTask(index) {
       this.listContent.content.splice(index, 1);
     },
     async saveList() {
+      // get user id to set into json
       this.listContent.byUser = await JSON.parse(localStorage.getItem('user'))._id;
       const url = 'http://localhost:3000/my_bags';
+      // if packlist is not without items
       if (this.listContent.content.length > 1) {
         try{
+          // post json to server
           await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

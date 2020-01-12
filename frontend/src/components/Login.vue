@@ -49,9 +49,11 @@ export default {
   },
   methods: {
     async submitLoginForm() {
+      // if password input is not empty
       if (this.userLoginData.password.length > 0) {
         const url = 'http://localhost:3000/users/login';
         try{
+          // post form data to server
           const res = await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -61,9 +63,10 @@ export default {
             }),
           });
           const data = await res.json();
+          // entries to local storage to keep up login
           localStorage.setItem('user',JSON.stringify(data.loggedUser));
           localStorage.setItem('jwt',data.token);
-
+          // on successful login, go to Account
           if (localStorage.getItem('jwt') != null){
             this.$emit('loggedIn');
             this.$router.push('account');
