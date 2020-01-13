@@ -41,9 +41,13 @@ async function initDB() {
  * @return {Promise<boolean>} True, if the DB exists, otherwise false.
  */
 async function isDBExisting(dbClient, dbName) {
-  const result = await dbClient.mongoClient.db('admin').admin()
+  const result = await dbClient.mongoClient
+      .db('admin')
+      .admin()
       .listDatabases({nameOnly: true});
-  return result.databases.includes(dbName);
+  return result.databases.some((value) => {
+    return value.name === dbName;
+  });
 }
 
 
