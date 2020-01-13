@@ -3,6 +3,9 @@
 const Item = require('../model/bag/Item');
 const Bag = require('../model/bag/Bag');
 
+// Checks whether a string specifies an offset.
+const special = new RegExp('(?<=\\+)\\d+');
+
 /** Enables the creation of valid bag-objects. */
 class BagFactory {
   /**
@@ -12,7 +15,21 @@ class BagFactory {
    * @return {Bag|undefined} Bag or 'undefined'.
    */
   static create(rawBag) {
-    const bag = new Bag(rawBag.name, rawBag.illustration, rawBag.dueDate, rawBag.byUser);
+    let dueDate = rawBag.dueDate;
+
+    // Check if dueDate contains an offset instead of a date.
+    if (dueDate && dueDate.match) {
+      const matches = rawBag.dueDate.match(special);
+      const secOffset = matches ? Number.parseInt(matches[0]) : null;
+      if (secOffset) {
+        dueDate = new Date();
+        dueDate.setSeconds(dueDate.getSeconds() + secOffset);
+        dueDate = dueDate.toISOString();
+      }
+    }
+
+    const bag =
+      new Bag(rawBag.name, rawBag.illustration, dueDate, rawBag.byUser);
 
     if (rawBag.content && !Array.isArray(rawBag.content)) {
       return undefined;
