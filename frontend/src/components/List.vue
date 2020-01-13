@@ -7,7 +7,7 @@
     <div class="list-body">
       <div class="packlist-wrapper">
         <input class="listname-input"
-          v-model="listContent.name" :placeholder="list.name">
+          v-model="listContent.name">
         <ul class="packlist">
           <li
             v-for="(item, index) in listContent.content"
@@ -82,7 +82,7 @@ export default {
       listName: '',
       packlist: [],
       listContent: {
-        name: '',
+        name: this.slide.name,
         illustration: this.slide.illustration,
         byUser: '',
         content: [
