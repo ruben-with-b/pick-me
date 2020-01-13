@@ -44,7 +44,8 @@ export default {
       userLoginData: {
         mail: '',
         password: ''
-      }
+      },
+      errorBox: false
     };
   },
   methods: {
@@ -72,6 +73,8 @@ export default {
               this.$emit('loggedIn');
               this.$router.push('account');
             }
+          } else {
+            this.errorBox = true;
           }
         } catch (error) {
           console.error(error);
