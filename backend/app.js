@@ -2,25 +2,28 @@
 
 // Load environment variables
 require('dotenv').config();
-
-// Auto-generated-at-express-setup---------------------------------------------
-const express = require('express');
 const cors = require('cors');
+
+const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const app = express();
-
-app.use(logger('dev'));
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(cookieParser());
-app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-// ----------------------------------------------------------------------------
+app.use(cookieParser());
+app.use(express.urlencoded({extended: true}));
+/* Enable CORS for frontend */
+app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    }),
+);
+/* Allow OPTIONS on all resources */
+app.options('*', cors());
+app.use(logger('dev'));
+app.use(express.json());
 
 const NotificationScheduler =
   require('./libs/pickme/logic/NotificationScheduler');
@@ -32,17 +35,6 @@ const usersRouter = require('./routes/users');
 const yaml = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = yaml.load('./backend/swagger.yaml');
-
-// Enable deploying the frontend and backend with two different ports at the
-// same machine.
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader('Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept');
-  // Pass to next layer of middleware
-  next();
-});
 
 // Add routes.
 app.use('/bag_templates', bagTemplatesRouter);
