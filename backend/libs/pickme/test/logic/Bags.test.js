@@ -19,15 +19,15 @@ beforeAll(() => {
 });
 
 beforeEach(async (done) => {
-  demoBags.map(async (bag) => {
+  await Promise.all(demoBags.map(async (bag) => {
     await Bags.addBag(bag);
-  });
+  }));
+  jest.clearAllMocks();
   done();
 });
 
 afterEach(async (done) => {
   await mongoDbMock.cleanup();
-  jest.clearAllMocks();
   done();
 });
 
@@ -43,13 +43,18 @@ test('Add/get bags', async (done) => {
 
   const bagsWithoutId = actualBags.map((bag) => {
     const clone = {...bag};
-    delete clone._id;
+    clone._id = undefined;
     return clone;
   });
 
   // CHECK
   expect(bagsWithoutId.length).toBe(2);
-  expect(bagsWithoutId).toEqual(demoBags);
+
+  expect(bagsWithoutId.length).toBe(demoBags.length);
+
+  demoBags.forEach((bag) => {
+    expect(bagsWithoutId).toContainEqual(bag);
+  });
 
   actualBags.forEach((bag) => {
     expect(bag._id).toBeDefined();
@@ -95,7 +100,7 @@ test('Update malformed bag', async (done) => {
 
 test('Add bag', async (done) => {
   // PRE
-  const additionalBag = new Bag('additional bag', null, null);
+  const additionalBag = new Bag('additional bag', null, null, null);
   additionalBag.addItem(new Item('item-name', true));
 
   const scheduleNotification =
