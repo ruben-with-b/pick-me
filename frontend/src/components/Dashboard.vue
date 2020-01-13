@@ -18,7 +18,7 @@
             <icon-share />
           </icon-base>
           <icon-base width="25" height="25" viewBox="0 0 10 10"
-          @click.native="deleteList(packList._id)">
+            @click.native="deleteList(packList._id)">
             <icon-bucket />
           </icon-base>
         </div>
@@ -65,7 +65,7 @@ export default {
       packLists: undefined,
       userId: '',
       showErrorBox: false,
-      loggedOut: false
+      loggedOut: false,
     };
   },
   async mounted() {
@@ -96,15 +96,18 @@ export default {
       } catch (error) {
           console.error(error);
       }
-
-
     }
   },
   methods: {
     async deleteList(id) {
       const url = 'http://localhost:3000/my_bags/' + id;
-      await fetch(url, {method: 'DELETE'});
-      this.$router.go();
+       try {
+        await fetch(url, {method: 'DELETE'});
+        this.$router.go();
+       }
+      catch (error) {
+          console.error(error);
+      }
     },
   },
 };
