@@ -201,7 +201,11 @@ paths:
                 dueDate:
                   type: string
                   format: date-time
-                  description: (optional) Time at which the bag must be ready packed. (ISO 8601 format)
+                  description: |
+                    (optional) Time at which the bag must be ready packed. The
+                    time can be specified either as an ISO 8601 formatted string
+                    or as offset in seconds (e.g. "+10" shedules a notification in
+                    ten seconds).
                 byUser:
                   type: string
                   description: (optional) The id of the user that created the bag.

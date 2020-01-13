@@ -5,6 +5,7 @@ const Bags = require('../libs/pickme/logic/Bags');
 const BagFactory = require('../libs/pickme/logic/BagFactory');
 const WhatsAppMsgBuilder = require('../libs/pickme/logic/WhatsAppMsgBuilder');
 const Database = require('../libs/pickme/database/Database');
+const BagValidator = require('../libs/pickme/utils/BagValidator');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
@@ -48,15 +49,17 @@ router.get('/:id', async (req, res) => {
 /* Create a new bag. If the request contains an existing bag, it is updated. */
 router.post('/', async (req, res) => {
   try {
-    const bag = BagFactory.create(req.body);
-    if (!bag) {
+    const error = BagValidator.validate(req.body);
+    if (error) {
       res.statusCode = 400;
       res.send({
-        message:
-          `Request body does not contain valid bag: ` +
-          `${JSON.stringify(req.body)}`,
+        message: error,
       });
-    } else if (bag._id) {
+      return;
+    }
+
+    const bag = BagFactory.create(req.body);
+    if (bag._id) {
       // If the bag has an id we should update the existing bag.
       if (!await Database.isObjectIdValid(bag._id)) {
         // Invalid ID
