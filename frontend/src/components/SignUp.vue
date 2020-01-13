@@ -25,6 +25,12 @@
             Login &nbsp;›
           </router-link>
         </div>
+        <div v-if="responseNotOk" class="error-box">
+          <p>
+            Ouch... Any input missing?<br>
+            <b>Try again!</b>
+          </p>
+        </div>
       </form>
     </div>
     <NavigationCheck @send="submitForm"/>
@@ -50,8 +56,8 @@ export default {
         username: '',
         mail: '',
         password: ''
-      }
-
+      },
+      responseNotOk: false
     };
   },
   methods: {
@@ -68,14 +74,19 @@ export default {
             password: bcrypt.hashSync(this.userData.password , 8)
           }),
         });
-        const data = await res.json();
-        // entries to local storage to keep up login
-        localStorage.setItem('user',JSON.stringify(data.user));
-        localStorage.setItem('jwt',data.token);
-        // on successful login, go to Account
-        if (localStorage.getItem('jwt') != null){
-          this.$emit('loggedIn');
-          this.$router.push('account');
+        if(res.ok){
+          const data = await res.json();
+          // entries to local storage to keep up login
+          localStorage.setItem('user',JSON.stringify(data.user));
+          localStorage.setItem('jwt',data.token);
+          // on successful login, go to Account
+          if (localStorage.getItem('jwt') != null){
+            this.$emit('loggedIn');
+            this.$router.push('account');
+          }
+        }
+        else {
+          this.responseNotOk = true;
         }
       } catch (error) {
           console.error(error);
@@ -167,6 +178,11 @@ export default {
     font-weight: 500;
     font-size: 1.1rem;
     margin: 2em 0 0 0;
+  }
+
+   .error-box{
+    color: red;
+    margin: 4em 0 0 0;
   }
 }
 </style>
