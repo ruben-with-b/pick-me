@@ -1,4 +1,26 @@
-# Entwickler-Dokumentation
+# Dokumentation
+
+## "Unsichtbare Funktionen"
+Die Funktionen "auf WhatsApp teilen" und "Benachrichtigungen erstellen" werden 
+nicht vom Frontend unterstützt. Diese Funktionen können nur über die 
+Swagger-API-Dokumentation genutzt werden: 
+ * Zum nutzen der Funktion "***auf WhatsApp teilen***" muss zuerst die ID einer 
+ Packliste in Erfahrung gebracht werden. Dazu bietete es sich an einen GET-Aufruf
+ auf dem "/my_bags"-Endpoint auszuführen. Hier kopiert man sich nun die ID der
+ Packliste, die geteilt werden soll. Diese ID übergibt man im Anschluss an den 
+ Endpoint "/my_bags/{id}/share_on_whatsapp". Dieser Endpoint liefert dann eine 
+ URI im whatsapp-Protokoll. Diese URI kann jedem gängigen Browser übergeben 
+ werden. Ist WhatsApp Desktop oder WhatsApp installiert, so wird die 
+ Applikation geöffnet. In der Applikation muss man nun nur noch den Empfänger 
+ wählen. Danach kann mit einem Klick eine Text-Repräsentation der Packliste 
+ verschickt werden.
+ * Die Funktion "***Benachrichtigungen erstellen***" ist Teil der Funktion 
+ "Tasche erzeugen". Zusätzlich zu den Standardattributen einer Tasche muss
+ ein dueDate übergeben werden. Dieses dueDate wird entweder absolut (als 
+ Datum im ISO-Format, z.B.: "2020-01-13T15:11:50.068Z") oder relativ (x Sekunden 
+ in der Zukunft, z.B.: "+10") angegeben. Nachdem die Tasche erzeugt wurde 
+ erinnert die Anwendung zum spezifizierten Zeitpunkt daran, dass man die Tasche
+ fertig packen muss. ***Das geschieht mithilfe einer Ausgabe auf der Konsole.***
 
 ## Externe Abhängigkeiten
 Die einzige externe Abhängigkeit dieser Anwendung ist die Datenbank. Hierbei 
