@@ -25,10 +25,18 @@
       </div>
       <div v-if="showErrorBox" class="error-box">
         <img src="@/assets/empty-list.png"
-          alt="404" class="error-img">
+          alt="empty-list" class="error-img">
         <p class="p-error-box">
           You haven't a packing list yet.<br>
           <b>Tap <span class="plus">+</span> to create your first one!</b>
+        </p>
+      </div>
+      <div v-if="loggedOut" class="error-box">
+        <img src="@/assets/please-login.png"
+          alt="please-login" class="error-img">
+        <p class="p-error-box">
+          <b>Please log in</b><br>
+          to create and see your pack lists.
         </p>
       </div>
     </div>
@@ -56,7 +64,8 @@ export default {
     return {
       packLists: undefined,
       userId: '',
-      showErrorBox: false
+      showErrorBox: false,
+      loggedOut: false
     };
   },
   async mounted() {
@@ -68,7 +77,7 @@ export default {
         const url = 'http://localhost:3000/my_bags/' + this.userId;
         const response = await fetch(url, {method: 'GET'});
         this.packLists = await response.json();
-        
+        this.loggedOut = false;
         if (this.packLists.length === 0) {
           this.showErrorBox = true;   
         } else {
@@ -77,6 +86,8 @@ export default {
       } catch (error) {
           console.error(error);
       }
+    } else {
+      this.loggedOut = true;
     }
   },
   methods: {
@@ -168,14 +179,14 @@ a{
   justify-content: center;
   align-items: center;
 
+  .error-img{
+    width: 20em;
+  }
+
   .plus{
     font-size: 1.6rem;
     font-weight: 400;
     margin: 0 0.2em;
   }
-}
-
-.error-img{
-  width: 20em;
 }
 </style>
