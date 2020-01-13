@@ -87,7 +87,17 @@ export default {
           console.error(error);
       }
     } else {
-      this.loggedOut = true;
+      try{
+        // get sample bags when user is not logged in
+        const url = 'http://localhost:3000/my_bags/samples';
+        const response = await fetch(url, {method: 'GET'});
+        this.packLists = await response.json();
+        this.loggedOut = true;
+      } catch (error) {
+          console.error(error);
+      }
+
+
     }
   },
   methods: {
