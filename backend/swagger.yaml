@@ -6,7 +6,7 @@ info:
     which allows a user to manage private packing lists for several different bags.
   version: 1.0.0
 
-paths:
+paths: # TODO add endpoint /my_bags/samples
   /users:
       get:
         summary: Returns a list of all registred users.

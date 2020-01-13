@@ -21,6 +21,19 @@ class Bags {
   }
 
   /**
+   * @return {Promise<Bag[]>} All sample bags.
+   */
+  static async getSampleBags() {
+    const dbClient = await Database.connect();
+    try {
+      return (await dbClient.getSampleBags()).map(
+          (bag) => BagFactory.create(bag));
+    } finally {
+      await dbClient.close();
+    }
+  }
+
+  /**
    * Updates an existing bag.
    * @param {Bag} rawBag An existing bag (must contain an id).
    * @return {Promise<Bag>}

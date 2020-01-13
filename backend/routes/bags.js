@@ -30,6 +30,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+/* GET sample bags. */
+router.get('/samples', async (req, res) => {
+  try {
+    const bags = await Bags.getSampleBags();
+    res.send(bags);
+  } catch (error) {
+    res.statusCode = 500;
+    res.send({
+      message: INTERNAL_ERROR_MSG,
+    });
+    console.error(error);
+  }
+});
+
 /* GET bags from single authenticated user. */
 router.get('/:id', async (req, res) => {
   const userId = req.params.id;
