@@ -82,7 +82,7 @@ let router = new Router({
       component: PageNotFound,
     },
   ],
-})
+});
 
 router.beforeEach((to, from, next) => {
   // if want to route to an auth required page
@@ -98,7 +98,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next() 
   }
-})
+});
 
 export default router
 

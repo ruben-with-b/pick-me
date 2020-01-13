@@ -13,7 +13,8 @@ class Users {
   static async getUsers() {
     const dbClient = await Database.connect();
     try {
-      return (await dbClient.getUsers()).map((user) => UserCreator.create(user));
+      return (await dbClient.getUsers()).map(
+          (user) => UserCreator.create(user));
     } finally {
       await dbClient.close();
     }
