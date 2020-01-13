@@ -21,6 +21,11 @@
             Sign up &nbsp;›
           </router-link>
         </div>
+        <div v-if="responseNotOk" class="error-box">
+          <p>
+            Ouch! Correct mail adress or password?
+          </p>
+        </div>
       </form>
     </div>
     <NavigationLogin @send="submitLoginForm"/>
@@ -45,7 +50,7 @@ export default {
         mail: '',
         password: ''
       },
-      errorBox: false
+      responseNotOk: false
     };
   },
   methods: {
@@ -74,7 +79,7 @@ export default {
               this.$router.push('account');
             }
           } else {
-            this.errorBox = true;
+            this.responseNotOk = true;
           }
         } catch (error) {
           console.error(error);
@@ -157,6 +162,11 @@ export default {
       font-size: 1.1rem;
       transition: 100ms all ease-in-out;
     }
+  }
+
+  .error-box{
+    color: red;
+    margin: 4em 0 0 0;
   }
 
   .signUp{
